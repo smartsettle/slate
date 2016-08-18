@@ -69,6 +69,7 @@ Parameter | Acceptable Values | Result | Default
 search | String | Negotiations with a name or description matching your String. | null
 ordering | String - default ascending, prefix with `-` for descending - `id`, `name`, `your_role`, `other_party`, `party_waiting_on`, `session_number`, `status`, `last_update` | Orders the results based on the defined value | `last_update DESC`
 page | Int | Paginates Negotiations | 1
+facilitating | boolean | By default, only the negotiations you are a party in are returned by the API. By setting this to true, negotiations that you are facilitating but not a party in are returned | false
 per_page | Int | Defines the amount of Negotiations per page | 20
 
 ## Negotiation
