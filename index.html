@@ -225,12 +225,78 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#negotiations" class="toc-h1 toc-link" data-title="Negotiations">Negotiations</a>
+            <a href="#negotiation" class="toc-h1 toc-link" data-title="Negotiation">Negotiation</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#negotiation" class="toc-h2 toc-link" data-title="Negotiations">Negotiation</a>
+                    <a href="#list-negotiations" class="toc-h2 toc-link" data-title="Negotiation">List Negotiations</a>
+                  </li>
+                  <li>
+                    <a href="#retrieve-a-negotiation" class="toc-h2 toc-link" data-title="Negotiation">Retrieve a Negotiation</a>
+                  </li>
+                  <li>
+                    <a href="#update-acceptance" class="toc-h2 toc-link" data-title="Negotiation">Update Acceptance</a>
+                  </li>
+                  <li>
+                    <a href="#update-visible-proposal" class="toc-h2 toc-link" data-title="Negotiation">Update Visible Proposal</a>
+                  </li>
+                  <li>
+                    <a href="#update-acceptance-amp-visible-proposal" class="toc-h2 toc-link" data-title="Negotiation">Update Acceptance &amp; Visible Proposal</a>
+                  </li>
+                  <li>
+                    <a href="#end-session" class="toc-h2 toc-link" data-title="Negotiation">End Session</a>
+                  </li>
+                  <li>
+                    <a href="#decalre-final-session" class="toc-h2 toc-link" data-title="Negotiation">Decalre Final Session</a>
+                  </li>
+                  <li>
+                    <a href="#declare-all-done" class="toc-h2 toc-link" data-title="Negotiation">Declare All Done</a>
+                  </li>
+                  <li>
+                    <a href="#party-ping" class="toc-h2 toc-link" data-title="Negotiation">Party Ping</a>
+                  </li>
+                  <li>
+                    <a href="#negotiation-status" class="toc-h2 toc-link" data-title="Negotiation">Negotiation Status</a>
                   </li>
               </ul>
+          </li>
+          <li>
+            <a href="#party" class="toc-h1 toc-link" data-title="Party">Party</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-party" class="toc-h2 toc-link" data-title="Party">Get Party</a>
+                  </li>
+                  <li>
+                    <a href="#update-party" class="toc-h2 toc-link" data-title="Party">Update Party</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#user" class="toc-h1 toc-link" data-title="User">User</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-user" class="toc-h2 toc-link" data-title="User">Get User</a>
+                  </li>
+                  <li>
+                    <a href="#update-user" class="toc-h2 toc-link" data-title="User">Update User</a>
+                  </li>
+                  <li>
+                    <a href="#create-user" class="toc-h2 toc-link" data-title="User">Create User</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#history" class="toc-h1 toc-link" data-title="History">History</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-all-entires" class="toc-h2 toc-link" data-title="History">Get all entires</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#automated-negotiation-actions" class="toc-h1 toc-link" data-title="Automated Negotiation Actions">Automated Negotiation Actions</a>
+          </li>
+          <li>
+            <a href="#private-reference-packages" class="toc-h1 toc-link" data-title="Private Reference Packages">Private Reference Packages</a>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
@@ -245,9 +311,9 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Smartsettle API! You can use our API to access Smartsettle API endpoints, which can get information on negotiations.</p>
+<p>Welcome to the Smartsettle API v1! You can use our API to access your negotiations, parties, and more! In the future we will support the negotiation intake and creation process.</p>
 
-<p>Our api follows the <a href='http://jsonapi.org/format/' target='_blank'>JSON API v1 Format</a></p>
+<p>Our API return JSON to all responses. Some of our API follows the <a href='http://jsonapi.org/format/' target='_blank'>JSON API v1 Format</a>.</p>
 
 <blockquote>
 <p>API responses will look like this:</p>
@@ -272,15 +338,15 @@
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct headers with each request</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can need to pass the correct headers with each request</span>
 curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"X-User-Email: example@example.com"</span> -H <span class="s2">"X-User-Token: meowmeowmeow"</span>
+  -H <span class="s2">"X-User-Email: example@example.com"</span> -H <span class="s2">"X-User-Token: 123abc"</span>
 </code></pre>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Make sure to replace <code>123abc</code> with your API key.</p>
 </blockquote>
-<h1 id='negotiations'>Negotiations</h1><pre class="highlight shell tab-shell"><code><span class="c"># Example:</span>
-curl <span class="s2">"https://go.smartsettle.com/api/negotiations?page=1&amp;per_page=50&amp;ordering=your_role&amp;search=settlement"</span>
+<h1 id='negotiation'>Negotiation</h1><h2 id='list-negotiations'>List Negotiations</h2><pre class="highlight shell tab-shell"><code><span class="c"># Example:</span>
+curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations?page=1&amp;per_page=50&amp;ordering=your_role&amp;search=settlement"</span>
 </code></pre>
 <p>Smartsettle provides an api endpoint to retreive, filter, and order Negotiations.</p>
 
@@ -325,8 +391,1450 @@ curl <span class="s2">"https://go.smartsettle.com/api/negotiations?page=1&amp;pe
 <td>20</td>
 </tr>
 </tbody></table>
-<h2 id='negotiation'>Negotiation</h2>
-<p>To retrieve a single negotiation... Coming soon</p>
+<h2 id='retrieve-a-negotiation'>Retrieve a Negotiation</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id"</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"negotiation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"creator_user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_template_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_session_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_agreement_framework"</span><span class="p">:</span><span class="w"> </span><span class="mi">283</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"agreement_timestamp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"arbitration_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-19T23:14:33.052Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-19T23:14:36.772Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"creator_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"party"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"practice"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JILL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GEORGE"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_waiting_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_update"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19 Jul 23:14"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status_msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Active negotiation"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_availibility"</span><span class="p">:</span><span class="w"> </span><span class="s2">"offline"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:3000/negotiations/285"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Collaborative George &amp; Jill Spousal Support"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"final_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"all_accepted_framework"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Retrieve information about specific negotiation. All you need to know is the negotiation id.</p>
+<h2 id='update-acceptance'>Update Acceptance</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/update_acceptance"</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"298"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"acceptance"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"issue_slider_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_session"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to be paid"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_formatted_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay (CAD)"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"higher"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"preferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"unpreferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"grid_increment"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"acceptance"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"walkaway"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"counter_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"counter_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_set_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_walkaway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lower"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"suggestion_set"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mi">500</span><span class="p">,</span><span class="w">
+      </span><span class="mi">510</span><span class="p">,</span><span class="w">
+      </span><span class="mi">520</span><span class="p">,</span><span class="w">
+      </span><span class="mi">530</span><span class="p">,</span><span class="w">
+      </span><span class="mi">540</span><span class="p">,</span><span class="w">
+      </span><span class="mi">550</span><span class="p">,</span><span class="w">
+      </span><span class="mi">560</span><span class="p">,</span><span class="w">
+      </span><span class="mi">570</span><span class="p">,</span><span class="w">
+      </span><span class="mi">580</span><span class="p">,</span><span class="w">
+      </span><span class="mi">590</span><span class="p">,</span><span class="w">
+      </span><span class="mi">600</span><span class="p">,</span><span class="w">
+      </span><span class="mi">610</span><span class="p">,</span><span class="w">
+      </span><span class="mi">620</span><span class="p">,</span><span class="w">
+      </span><span class="mi">630</span><span class="p">,</span><span class="w">
+      </span><span class="mi">640</span><span class="p">,</span><span class="w">
+      </span><span class="mi">650</span><span class="p">,</span><span class="w">
+      </span><span class="mi">660</span><span class="p">,</span><span class="w">
+      </span><span class="mi">670</span><span class="p">,</span><span class="w">
+      </span><span class="mi">680</span><span class="p">,</span><span class="w">
+      </span><span class="mi">690</span><span class="p">,</span><span class="w">
+      </span><span class="mi">700</span><span class="p">,</span><span class="w">
+      </span><span class="mi">710</span><span class="p">,</span><span class="w">
+      </span><span class="mi">720</span><span class="p">,</span><span class="w">
+      </span><span class="mi">730</span><span class="p">,</span><span class="w">
+      </span><span class="mi">740</span><span class="p">,</span><span class="w">
+      </span><span class="mi">750</span><span class="p">,</span><span class="w">
+      </span><span class="mi">760</span><span class="p">,</span><span class="w">
+      </span><span class="mi">770</span><span class="p">,</span><span class="w">
+      </span><span class="mi">780</span><span class="p">,</span><span class="w">
+      </span><span class="mi">790</span><span class="p">,</span><span class="w">
+      </span><span class="mi">800</span><span class="p">,</span><span class="w">
+      </span><span class="mi">810</span><span class="p">,</span><span class="w">
+      </span><span class="mi">820</span><span class="p">,</span><span class="w">
+      </span><span class="mi">830</span><span class="p">,</span><span class="w">
+      </span><span class="mi">840</span><span class="p">,</span><span class="w">
+      </span><span class="mi">850</span><span class="p">,</span><span class="w">
+      </span><span class="mi">860</span><span class="p">,</span><span class="w">
+      </span><span class="mi">870</span><span class="p">,</span><span class="w">
+      </span><span class="mi">880</span><span class="p">,</span><span class="w">
+      </span><span class="mi">890</span><span class="p">,</span><span class="w">
+      </span><span class="mi">900</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"session_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mi">100</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"acceptance_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"proposal_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"negotiation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_session_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Session 1 - waiting for you to make an initial proposal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"arbitration_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"show_guided_help"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Derek Barber"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party A"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"can_end_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"other_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party B"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unaccepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"session"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"final_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"af"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"is_configured"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ready"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_lock_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"slider_grids_params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"issue_298"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"current_session"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to be paid"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_formatted_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay (CAD)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"higher"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"unpreferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"grid_increment"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"acceptance"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"walkaway"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"counter_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"counter_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_set_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_walkaway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lower"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"suggestion_set"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="mi">510</span><span class="p">,</span><span class="w">
+          </span><span class="mi">520</span><span class="p">,</span><span class="w">
+          </span><span class="mi">530</span><span class="p">,</span><span class="w">
+          </span><span class="mi">540</span><span class="p">,</span><span class="w">
+          </span><span class="mi">550</span><span class="p">,</span><span class="w">
+          </span><span class="mi">560</span><span class="p">,</span><span class="w">
+          </span><span class="mi">570</span><span class="p">,</span><span class="w">
+          </span><span class="mi">580</span><span class="p">,</span><span class="w">
+          </span><span class="mi">590</span><span class="p">,</span><span class="w">
+          </span><span class="mi">600</span><span class="p">,</span><span class="w">
+          </span><span class="mi">610</span><span class="p">,</span><span class="w">
+          </span><span class="mi">620</span><span class="p">,</span><span class="w">
+          </span><span class="mi">630</span><span class="p">,</span><span class="w">
+          </span><span class="mi">640</span><span class="p">,</span><span class="w">
+          </span><span class="mi">650</span><span class="p">,</span><span class="w">
+          </span><span class="mi">660</span><span class="p">,</span><span class="w">
+          </span><span class="mi">670</span><span class="p">,</span><span class="w">
+          </span><span class="mi">680</span><span class="p">,</span><span class="w">
+          </span><span class="mi">690</span><span class="p">,</span><span class="w">
+          </span><span class="mi">700</span><span class="p">,</span><span class="w">
+          </span><span class="mi">710</span><span class="p">,</span><span class="w">
+          </span><span class="mi">720</span><span class="p">,</span><span class="w">
+          </span><span class="mi">730</span><span class="p">,</span><span class="w">
+          </span><span class="mi">740</span><span class="p">,</span><span class="w">
+          </span><span class="mi">750</span><span class="p">,</span><span class="w">
+          </span><span class="mi">760</span><span class="p">,</span><span class="w">
+          </span><span class="mi">770</span><span class="p">,</span><span class="w">
+          </span><span class="mi">780</span><span class="p">,</span><span class="w">
+          </span><span class="mi">790</span><span class="p">,</span><span class="w">
+          </span><span class="mi">800</span><span class="p">,</span><span class="w">
+          </span><span class="mi">810</span><span class="p">,</span><span class="w">
+          </span><span class="mi">820</span><span class="p">,</span><span class="w">
+          </span><span class="mi">830</span><span class="p">,</span><span class="w">
+          </span><span class="mi">840</span><span class="p">,</span><span class="w">
+          </span><span class="mi">850</span><span class="p">,</span><span class="w">
+          </span><span class="mi">860</span><span class="p">,</span><span class="w">
+          </span><span class="mi">870</span><span class="p">,</span><span class="w">
+          </span><span class="mi">880</span><span class="p">,</span><span class="w">
+          </span><span class="mi">890</span><span class="p">,</span><span class="w">
+          </span><span class="mi">900</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"session_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">100</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"acceptance_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"proposal_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Acceptance has been updated"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Update the current parties acceptance value for the current negotiation session.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Acceptable Values</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>issue_id</td>
+<td>Integer</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>acceptance</td>
+<td>Integer</td>
+<td>yes</td>
+</tr>
+</tbody></table>
+<h2 id='update-visible-proposal'>Update Visible Proposal</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/update_visible_proposal"</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"298"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"issue_slider_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_session"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to be paid"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_formatted_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay (CAD)"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"higher"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"preferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"unpreferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"grid_increment"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"acceptance"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_set_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_walkaway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lower"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"suggestion_set"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mi">500</span><span class="p">,</span><span class="w">
+      </span><span class="mi">510</span><span class="p">,</span><span class="w">
+      </span><span class="mi">520</span><span class="p">,</span><span class="w">
+      </span><span class="mi">530</span><span class="p">,</span><span class="w">
+      </span><span class="mi">540</span><span class="p">,</span><span class="w">
+      </span><span class="mi">550</span><span class="p">,</span><span class="w">
+      </span><span class="mi">560</span><span class="p">,</span><span class="w">
+      </span><span class="mi">570</span><span class="p">,</span><span class="w">
+      </span><span class="mi">580</span><span class="p">,</span><span class="w">
+      </span><span class="mi">590</span><span class="p">,</span><span class="w">
+      </span><span class="mi">600</span><span class="p">,</span><span class="w">
+      </span><span class="mi">610</span><span class="p">,</span><span class="w">
+      </span><span class="mi">620</span><span class="p">,</span><span class="w">
+      </span><span class="mi">630</span><span class="p">,</span><span class="w">
+      </span><span class="mi">640</span><span class="p">,</span><span class="w">
+      </span><span class="mi">650</span><span class="p">,</span><span class="w">
+      </span><span class="mi">660</span><span class="p">,</span><span class="w">
+      </span><span class="mi">670</span><span class="p">,</span><span class="w">
+      </span><span class="mi">680</span><span class="p">,</span><span class="w">
+      </span><span class="mi">690</span><span class="p">,</span><span class="w">
+      </span><span class="mi">700</span><span class="p">,</span><span class="w">
+      </span><span class="mi">710</span><span class="p">,</span><span class="w">
+      </span><span class="mi">720</span><span class="p">,</span><span class="w">
+      </span><span class="mi">730</span><span class="p">,</span><span class="w">
+      </span><span class="mi">740</span><span class="p">,</span><span class="w">
+      </span><span class="mi">750</span><span class="p">,</span><span class="w">
+      </span><span class="mi">760</span><span class="p">,</span><span class="w">
+      </span><span class="mi">770</span><span class="p">,</span><span class="w">
+      </span><span class="mi">780</span><span class="p">,</span><span class="w">
+      </span><span class="mi">790</span><span class="p">,</span><span class="w">
+      </span><span class="mi">800</span><span class="p">,</span><span class="w">
+      </span><span class="mi">810</span><span class="p">,</span><span class="w">
+      </span><span class="mi">820</span><span class="p">,</span><span class="w">
+      </span><span class="mi">830</span><span class="p">,</span><span class="w">
+      </span><span class="mi">840</span><span class="p">,</span><span class="w">
+      </span><span class="mi">850</span><span class="p">,</span><span class="w">
+      </span><span class="mi">860</span><span class="p">,</span><span class="w">
+      </span><span class="mi">870</span><span class="p">,</span><span class="w">
+      </span><span class="mi">880</span><span class="p">,</span><span class="w">
+      </span><span class="mi">890</span><span class="p">,</span><span class="w">
+      </span><span class="mi">900</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"session_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mi">840</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"acceptance_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"proposal_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"negotiation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_session_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Session 1 - waiting for George's proposal."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"arbitration_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"show_guided_help"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Derek Barber"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party A"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"can_end_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"other_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party B"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unaccepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"session"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"final_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"af"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"is_configured"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ready"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_lock_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"slider_grids_params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"issue_298"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"current_session"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to be paid"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_formatted_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay (CAD)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"higher"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"unpreferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"grid_increment"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"acceptance"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_set_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_walkaway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lower"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"suggestion_set"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="mi">510</span><span class="p">,</span><span class="w">
+          </span><span class="mi">520</span><span class="p">,</span><span class="w">
+          </span><span class="mi">530</span><span class="p">,</span><span class="w">
+          </span><span class="mi">540</span><span class="p">,</span><span class="w">
+          </span><span class="mi">550</span><span class="p">,</span><span class="w">
+          </span><span class="mi">560</span><span class="p">,</span><span class="w">
+          </span><span class="mi">570</span><span class="p">,</span><span class="w">
+          </span><span class="mi">580</span><span class="p">,</span><span class="w">
+          </span><span class="mi">590</span><span class="p">,</span><span class="w">
+          </span><span class="mi">600</span><span class="p">,</span><span class="w">
+          </span><span class="mi">610</span><span class="p">,</span><span class="w">
+          </span><span class="mi">620</span><span class="p">,</span><span class="w">
+          </span><span class="mi">630</span><span class="p">,</span><span class="w">
+          </span><span class="mi">640</span><span class="p">,</span><span class="w">
+          </span><span class="mi">650</span><span class="p">,</span><span class="w">
+          </span><span class="mi">660</span><span class="p">,</span><span class="w">
+          </span><span class="mi">670</span><span class="p">,</span><span class="w">
+          </span><span class="mi">680</span><span class="p">,</span><span class="w">
+          </span><span class="mi">690</span><span class="p">,</span><span class="w">
+          </span><span class="mi">700</span><span class="p">,</span><span class="w">
+          </span><span class="mi">710</span><span class="p">,</span><span class="w">
+          </span><span class="mi">720</span><span class="p">,</span><span class="w">
+          </span><span class="mi">730</span><span class="p">,</span><span class="w">
+          </span><span class="mi">740</span><span class="p">,</span><span class="w">
+          </span><span class="mi">750</span><span class="p">,</span><span class="w">
+          </span><span class="mi">760</span><span class="p">,</span><span class="w">
+          </span><span class="mi">770</span><span class="p">,</span><span class="w">
+          </span><span class="mi">780</span><span class="p">,</span><span class="w">
+          </span><span class="mi">790</span><span class="p">,</span><span class="w">
+          </span><span class="mi">800</span><span class="p">,</span><span class="w">
+          </span><span class="mi">810</span><span class="p">,</span><span class="w">
+          </span><span class="mi">820</span><span class="p">,</span><span class="w">
+          </span><span class="mi">830</span><span class="p">,</span><span class="w">
+          </span><span class="mi">840</span><span class="p">,</span><span class="w">
+          </span><span class="mi">850</span><span class="p">,</span><span class="w">
+          </span><span class="mi">860</span><span class="p">,</span><span class="w">
+          </span><span class="mi">870</span><span class="p">,</span><span class="w">
+          </span><span class="mi">880</span><span class="p">,</span><span class="w">
+          </span><span class="mi">890</span><span class="p">,</span><span class="w">
+          </span><span class="mi">900</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"session_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">840</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"acceptance_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"proposal_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visible Proposal has been updated"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Update the visible proposal for a specific issue.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Acceptable Values</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>issue_id</td>
+<td>Integer</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>visible_proposal</td>
+<td>Integer</td>
+<td>yes</td>
+</tr>
+</tbody></table>
+<h2 id='update-acceptance-amp-visible-proposal'>Update Acceptance &amp; Visible Proposal</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/update_acceptance_and_visible_proposal"</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"298"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"issue_slider_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_session"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to be paid"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"issue_formatted_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay (CAD)"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"higher"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"preferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"unpreferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"grid_increment"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"acceptance"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_set_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"has_walkaway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"other_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lower"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"suggestion_set"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mi">500</span><span class="p">,</span><span class="w">
+      </span><span class="mi">510</span><span class="p">,</span><span class="w">
+      </span><span class="mi">520</span><span class="p">,</span><span class="w">
+      </span><span class="mi">530</span><span class="p">,</span><span class="w">
+      </span><span class="mi">540</span><span class="p">,</span><span class="w">
+      </span><span class="mi">550</span><span class="p">,</span><span class="w">
+      </span><span class="mi">560</span><span class="p">,</span><span class="w">
+      </span><span class="mi">570</span><span class="p">,</span><span class="w">
+      </span><span class="mi">580</span><span class="p">,</span><span class="w">
+      </span><span class="mi">590</span><span class="p">,</span><span class="w">
+      </span><span class="mi">600</span><span class="p">,</span><span class="w">
+      </span><span class="mi">610</span><span class="p">,</span><span class="w">
+      </span><span class="mi">620</span><span class="p">,</span><span class="w">
+      </span><span class="mi">630</span><span class="p">,</span><span class="w">
+      </span><span class="mi">640</span><span class="p">,</span><span class="w">
+      </span><span class="mi">650</span><span class="p">,</span><span class="w">
+      </span><span class="mi">660</span><span class="p">,</span><span class="w">
+      </span><span class="mi">670</span><span class="p">,</span><span class="w">
+      </span><span class="mi">680</span><span class="p">,</span><span class="w">
+      </span><span class="mi">690</span><span class="p">,</span><span class="w">
+      </span><span class="mi">700</span><span class="p">,</span><span class="w">
+      </span><span class="mi">710</span><span class="p">,</span><span class="w">
+      </span><span class="mi">720</span><span class="p">,</span><span class="w">
+      </span><span class="mi">730</span><span class="p">,</span><span class="w">
+      </span><span class="mi">740</span><span class="p">,</span><span class="w">
+      </span><span class="mi">750</span><span class="p">,</span><span class="w">
+      </span><span class="mi">760</span><span class="p">,</span><span class="w">
+      </span><span class="mi">770</span><span class="p">,</span><span class="w">
+      </span><span class="mi">780</span><span class="p">,</span><span class="w">
+      </span><span class="mi">790</span><span class="p">,</span><span class="w">
+      </span><span class="mi">800</span><span class="p">,</span><span class="w">
+      </span><span class="mi">810</span><span class="p">,</span><span class="w">
+      </span><span class="mi">820</span><span class="p">,</span><span class="w">
+      </span><span class="mi">830</span><span class="p">,</span><span class="w">
+      </span><span class="mi">840</span><span class="p">,</span><span class="w">
+      </span><span class="mi">850</span><span class="p">,</span><span class="w">
+      </span><span class="mi">860</span><span class="p">,</span><span class="w">
+      </span><span class="mi">870</span><span class="p">,</span><span class="w">
+      </span><span class="mi">880</span><span class="p">,</span><span class="w">
+      </span><span class="mi">890</span><span class="p">,</span><span class="w">
+      </span><span class="mi">900</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"session_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mi">840</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"acceptance_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"proposal_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"negotiation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_session_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Session 1 - waiting for George's proposal."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"arbitration_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"show_guided_help"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Derek Barber"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party A"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"can_end_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"other_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party B"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unaccepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"session"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"final_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"af"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"is_configured"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ready"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_lock_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"slider_grids_params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"issue_298"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"current_session"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to be paid"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_formatted_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay (CAD)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"higher"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"unpreferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"grid_increment"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"acceptance"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_set_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_walkaway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lower"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"suggestion_set"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="mi">510</span><span class="p">,</span><span class="w">
+          </span><span class="mi">520</span><span class="p">,</span><span class="w">
+          </span><span class="mi">530</span><span class="p">,</span><span class="w">
+          </span><span class="mi">540</span><span class="p">,</span><span class="w">
+          </span><span class="mi">550</span><span class="p">,</span><span class="w">
+          </span><span class="mi">560</span><span class="p">,</span><span class="w">
+          </span><span class="mi">570</span><span class="p">,</span><span class="w">
+          </span><span class="mi">580</span><span class="p">,</span><span class="w">
+          </span><span class="mi">590</span><span class="p">,</span><span class="w">
+          </span><span class="mi">600</span><span class="p">,</span><span class="w">
+          </span><span class="mi">610</span><span class="p">,</span><span class="w">
+          </span><span class="mi">620</span><span class="p">,</span><span class="w">
+          </span><span class="mi">630</span><span class="p">,</span><span class="w">
+          </span><span class="mi">640</span><span class="p">,</span><span class="w">
+          </span><span class="mi">650</span><span class="p">,</span><span class="w">
+          </span><span class="mi">660</span><span class="p">,</span><span class="w">
+          </span><span class="mi">670</span><span class="p">,</span><span class="w">
+          </span><span class="mi">680</span><span class="p">,</span><span class="w">
+          </span><span class="mi">690</span><span class="p">,</span><span class="w">
+          </span><span class="mi">700</span><span class="p">,</span><span class="w">
+          </span><span class="mi">710</span><span class="p">,</span><span class="w">
+          </span><span class="mi">720</span><span class="p">,</span><span class="w">
+          </span><span class="mi">730</span><span class="p">,</span><span class="w">
+          </span><span class="mi">740</span><span class="p">,</span><span class="w">
+          </span><span class="mi">750</span><span class="p">,</span><span class="w">
+          </span><span class="mi">760</span><span class="p">,</span><span class="w">
+          </span><span class="mi">770</span><span class="p">,</span><span class="w">
+          </span><span class="mi">780</span><span class="p">,</span><span class="w">
+          </span><span class="mi">790</span><span class="p">,</span><span class="w">
+          </span><span class="mi">800</span><span class="p">,</span><span class="w">
+          </span><span class="mi">810</span><span class="p">,</span><span class="w">
+          </span><span class="mi">820</span><span class="p">,</span><span class="w">
+          </span><span class="mi">830</span><span class="p">,</span><span class="w">
+          </span><span class="mi">840</span><span class="p">,</span><span class="w">
+          </span><span class="mi">850</span><span class="p">,</span><span class="w">
+          </span><span class="mi">860</span><span class="p">,</span><span class="w">
+          </span><span class="mi">870</span><span class="p">,</span><span class="w">
+          </span><span class="mi">880</span><span class="p">,</span><span class="w">
+          </span><span class="mi">890</span><span class="p">,</span><span class="w">
+          </span><span class="mi">900</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"session_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">840</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"acceptance_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"proposal_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Visible Proposal &amp; Acceptance have been updated"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Update the visible proposal and acceptance to the same value for a specific issue.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Acceptable Values</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>issue_id</td>
+<td>Integer</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>visible_proposal</td>
+<td>Integer</td>
+<td>yes</td>
+</tr>
+</tbody></table>
+<h2 id='end-session'>End Session</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/end_session"</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"negotiation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_session_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Session 1 - waiting for George's proposal."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"arbitration_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"show_guided_help"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Derek Barber"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party A"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"can_end_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"other_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party B"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unaccepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"session"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"final_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"af"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"is_configured"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ready"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_lock_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"slider_grids_params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"issue_298"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"current_session"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to be paid"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_formatted_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay (CAD)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"higher"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"unpreferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"grid_increment"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"acceptance"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_set_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_walkaway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lower"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"suggestion_set"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="mi">510</span><span class="p">,</span><span class="w">
+          </span><span class="mi">520</span><span class="p">,</span><span class="w">
+          </span><span class="mi">530</span><span class="p">,</span><span class="w">
+          </span><span class="mi">540</span><span class="p">,</span><span class="w">
+          </span><span class="mi">550</span><span class="p">,</span><span class="w">
+          </span><span class="mi">560</span><span class="p">,</span><span class="w">
+          </span><span class="mi">570</span><span class="p">,</span><span class="w">
+          </span><span class="mi">580</span><span class="p">,</span><span class="w">
+          </span><span class="mi">590</span><span class="p">,</span><span class="w">
+          </span><span class="mi">600</span><span class="p">,</span><span class="w">
+          </span><span class="mi">610</span><span class="p">,</span><span class="w">
+          </span><span class="mi">620</span><span class="p">,</span><span class="w">
+          </span><span class="mi">630</span><span class="p">,</span><span class="w">
+          </span><span class="mi">640</span><span class="p">,</span><span class="w">
+          </span><span class="mi">650</span><span class="p">,</span><span class="w">
+          </span><span class="mi">660</span><span class="p">,</span><span class="w">
+          </span><span class="mi">670</span><span class="p">,</span><span class="w">
+          </span><span class="mi">680</span><span class="p">,</span><span class="w">
+          </span><span class="mi">690</span><span class="p">,</span><span class="w">
+          </span><span class="mi">700</span><span class="p">,</span><span class="w">
+          </span><span class="mi">710</span><span class="p">,</span><span class="w">
+          </span><span class="mi">720</span><span class="p">,</span><span class="w">
+          </span><span class="mi">730</span><span class="p">,</span><span class="w">
+          </span><span class="mi">740</span><span class="p">,</span><span class="w">
+          </span><span class="mi">750</span><span class="p">,</span><span class="w">
+          </span><span class="mi">760</span><span class="p">,</span><span class="w">
+          </span><span class="mi">770</span><span class="p">,</span><span class="w">
+          </span><span class="mi">780</span><span class="p">,</span><span class="w">
+          </span><span class="mi">790</span><span class="p">,</span><span class="w">
+          </span><span class="mi">800</span><span class="p">,</span><span class="w">
+          </span><span class="mi">810</span><span class="p">,</span><span class="w">
+          </span><span class="mi">820</span><span class="p">,</span><span class="w">
+          </span><span class="mi">830</span><span class="p">,</span><span class="w">
+          </span><span class="mi">840</span><span class="p">,</span><span class="w">
+          </span><span class="mi">850</span><span class="p">,</span><span class="w">
+          </span><span class="mi">860</span><span class="p">,</span><span class="w">
+          </span><span class="mi">870</span><span class="p">,</span><span class="w">
+          </span><span class="mi">880</span><span class="p">,</span><span class="w">
+          </span><span class="mi">890</span><span class="p">,</span><span class="w">
+          </span><span class="mi">900</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"session_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">840</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"acceptance_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"proposal_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>End the session for this negotiation and the currently authenticated party.</p>
+<h2 id='decalre-final-session'>Decalre Final Session</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/declare_final_session"</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"negotiation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_session_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Session 1 &lt;b&gt;(FINAL)&lt;/b&gt; - Make final move and click </span><span class="se">\"</span><span class="s2">Declare Done</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"arbitration_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"show_guided_help"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Derek Barber"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party A"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"can_end_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"other_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party B"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unaccepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"session"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"final_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"af"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"is_configured"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ready"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_lock_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"slider_grids_params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"issue_298"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"current_session"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to be paid"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_formatted_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay (CAD)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"higher"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"unpreferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"grid_increment"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"acceptance"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_set_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_walkaway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lower"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"suggestion_set"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="mi">510</span><span class="p">,</span><span class="w">
+          </span><span class="mi">520</span><span class="p">,</span><span class="w">
+          </span><span class="mi">530</span><span class="p">,</span><span class="w">
+          </span><span class="mi">540</span><span class="p">,</span><span class="w">
+          </span><span class="mi">550</span><span class="p">,</span><span class="w">
+          </span><span class="mi">560</span><span class="p">,</span><span class="w">
+          </span><span class="mi">570</span><span class="p">,</span><span class="w">
+          </span><span class="mi">580</span><span class="p">,</span><span class="w">
+          </span><span class="mi">590</span><span class="p">,</span><span class="w">
+          </span><span class="mi">600</span><span class="p">,</span><span class="w">
+          </span><span class="mi">610</span><span class="p">,</span><span class="w">
+          </span><span class="mi">620</span><span class="p">,</span><span class="w">
+          </span><span class="mi">630</span><span class="p">,</span><span class="w">
+          </span><span class="mi">640</span><span class="p">,</span><span class="w">
+          </span><span class="mi">650</span><span class="p">,</span><span class="w">
+          </span><span class="mi">660</span><span class="p">,</span><span class="w">
+          </span><span class="mi">670</span><span class="p">,</span><span class="w">
+          </span><span class="mi">680</span><span class="p">,</span><span class="w">
+          </span><span class="mi">690</span><span class="p">,</span><span class="w">
+          </span><span class="mi">700</span><span class="p">,</span><span class="w">
+          </span><span class="mi">710</span><span class="p">,</span><span class="w">
+          </span><span class="mi">720</span><span class="p">,</span><span class="w">
+          </span><span class="mi">730</span><span class="p">,</span><span class="w">
+          </span><span class="mi">740</span><span class="p">,</span><span class="w">
+          </span><span class="mi">750</span><span class="p">,</span><span class="w">
+          </span><span class="mi">760</span><span class="p">,</span><span class="w">
+          </span><span class="mi">770</span><span class="p">,</span><span class="w">
+          </span><span class="mi">780</span><span class="p">,</span><span class="w">
+          </span><span class="mi">790</span><span class="p">,</span><span class="w">
+          </span><span class="mi">800</span><span class="p">,</span><span class="w">
+          </span><span class="mi">810</span><span class="p">,</span><span class="w">
+          </span><span class="mi">820</span><span class="p">,</span><span class="w">
+          </span><span class="mi">830</span><span class="p">,</span><span class="w">
+          </span><span class="mi">840</span><span class="p">,</span><span class="w">
+          </span><span class="mi">850</span><span class="p">,</span><span class="w">
+          </span><span class="mi">860</span><span class="p">,</span><span class="w">
+          </span><span class="mi">870</span><span class="p">,</span><span class="w">
+          </span><span class="mi">880</span><span class="p">,</span><span class="w">
+          </span><span class="mi">890</span><span class="p">,</span><span class="w">
+          </span><span class="mi">900</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"session_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">840</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"acceptance_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"proposal_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Declare final session this negotiation and the currently authenticated party.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Acceptable Values</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>arbitration_accepted</td>
+<td>Integer</td>
+<td>optional</td>
+</tr>
+</tbody></table>
+<h2 id='declare-all-done'>Declare All Done</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/declare_all_done"</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"negotiation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_session_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Session 1 &lt;b&gt;(FINAL)&lt;/b&gt; - Waiting for George"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"arbitration_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"show_guided_help"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Derek Barber"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party A"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"can_end_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"other_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party B"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unaccepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"session"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"final_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"af"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"is_configured"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ready"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_lock_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"slider_grids_params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"issue_298"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"current_session"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to be paid"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_formatted_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay (CAD)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"higher"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"unpreferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"grid_increment"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"acceptance"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">840</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_set_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_walkaway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lower"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"suggestion_set"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="mi">510</span><span class="p">,</span><span class="w">
+          </span><span class="mi">520</span><span class="p">,</span><span class="w">
+          </span><span class="mi">530</span><span class="p">,</span><span class="w">
+          </span><span class="mi">540</span><span class="p">,</span><span class="w">
+          </span><span class="mi">550</span><span class="p">,</span><span class="w">
+          </span><span class="mi">560</span><span class="p">,</span><span class="w">
+          </span><span class="mi">570</span><span class="p">,</span><span class="w">
+          </span><span class="mi">580</span><span class="p">,</span><span class="w">
+          </span><span class="mi">590</span><span class="p">,</span><span class="w">
+          </span><span class="mi">600</span><span class="p">,</span><span class="w">
+          </span><span class="mi">610</span><span class="p">,</span><span class="w">
+          </span><span class="mi">620</span><span class="p">,</span><span class="w">
+          </span><span class="mi">630</span><span class="p">,</span><span class="w">
+          </span><span class="mi">640</span><span class="p">,</span><span class="w">
+          </span><span class="mi">650</span><span class="p">,</span><span class="w">
+          </span><span class="mi">660</span><span class="p">,</span><span class="w">
+          </span><span class="mi">670</span><span class="p">,</span><span class="w">
+          </span><span class="mi">680</span><span class="p">,</span><span class="w">
+          </span><span class="mi">690</span><span class="p">,</span><span class="w">
+          </span><span class="mi">700</span><span class="p">,</span><span class="w">
+          </span><span class="mi">710</span><span class="p">,</span><span class="w">
+          </span><span class="mi">720</span><span class="p">,</span><span class="w">
+          </span><span class="mi">730</span><span class="p">,</span><span class="w">
+          </span><span class="mi">740</span><span class="p">,</span><span class="w">
+          </span><span class="mi">750</span><span class="p">,</span><span class="w">
+          </span><span class="mi">760</span><span class="p">,</span><span class="w">
+          </span><span class="mi">770</span><span class="p">,</span><span class="w">
+          </span><span class="mi">780</span><span class="p">,</span><span class="w">
+          </span><span class="mi">790</span><span class="p">,</span><span class="w">
+          </span><span class="mi">800</span><span class="p">,</span><span class="w">
+          </span><span class="mi">810</span><span class="p">,</span><span class="w">
+          </span><span class="mi">820</span><span class="p">,</span><span class="w">
+          </span><span class="mi">830</span><span class="p">,</span><span class="w">
+          </span><span class="mi">840</span><span class="p">,</span><span class="w">
+          </span><span class="mi">850</span><span class="p">,</span><span class="w">
+          </span><span class="mi">860</span><span class="p">,</span><span class="w">
+          </span><span class="mi">870</span><span class="p">,</span><span class="w">
+          </span><span class="mi">880</span><span class="p">,</span><span class="w">
+          </span><span class="mi">890</span><span class="p">,</span><span class="w">
+          </span><span class="mi">900</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"session_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">840</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"acceptance_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"proposal_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Declare all done for this negotiation and the currently authenticated party. All done means the party has locked in their final offers during the final session.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Acceptable Values</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>arbitration_accepted</td>
+<td>Integer</td>
+<td>optional</td>
+</tr>
+</tbody></table>
+<h2 id='party-ping'>Party Ping</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/party_ping"</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Calling this endpoint will update the parties online status. This endpoint should be hit every 5 minutes if possible to allow us to maintain the online/offline status.</p>
+<h2 id='negotiation-status'>Negotiation Status</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/negotiation_status"</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"negotiation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_session_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Session 1 - waiting for you to make an initial proposal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"arbitration_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"show_guided_help"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"your_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jim"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party A"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"can_end_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"other_party"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"George"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party B"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbitration_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"af_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unaccepted"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_ended_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_declared_done"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"session"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"final_session"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"af"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"is_configured"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ready"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"party_lock_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"slider_grids_params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"issue_298"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"negotiation_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active_sessions"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"current_session"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">556</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">557</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference_set"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to be paid"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issue_formatted_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount of spousal support to pay (CAD)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_proposed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_has_accepted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"your_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"higher"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"unpreferred_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"grid_increment"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"visible_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"acceptance"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"walkaway"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"counter_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"counter_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_set_initial_proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_walkaway"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other_party_issue_preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lower"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"suggestion_set"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="mi">510</span><span class="p">,</span><span class="w">
+          </span><span class="mi">520</span><span class="p">,</span><span class="w">
+          </span><span class="mi">530</span><span class="p">,</span><span class="w">
+          </span><span class="mi">540</span><span class="p">,</span><span class="w">
+          </span><span class="mi">550</span><span class="p">,</span><span class="w">
+          </span><span class="mi">560</span><span class="p">,</span><span class="w">
+          </span><span class="mi">570</span><span class="p">,</span><span class="w">
+          </span><span class="mi">580</span><span class="p">,</span><span class="w">
+          </span><span class="mi">590</span><span class="p">,</span><span class="w">
+          </span><span class="mi">600</span><span class="p">,</span><span class="w">
+          </span><span class="mi">610</span><span class="p">,</span><span class="w">
+          </span><span class="mi">620</span><span class="p">,</span><span class="w">
+          </span><span class="mi">630</span><span class="p">,</span><span class="w">
+          </span><span class="mi">640</span><span class="p">,</span><span class="w">
+          </span><span class="mi">650</span><span class="p">,</span><span class="w">
+          </span><span class="mi">660</span><span class="p">,</span><span class="w">
+          </span><span class="mi">670</span><span class="p">,</span><span class="w">
+          </span><span class="mi">680</span><span class="p">,</span><span class="w">
+          </span><span class="mi">690</span><span class="p">,</span><span class="w">
+          </span><span class="mi">700</span><span class="p">,</span><span class="w">
+          </span><span class="mi">710</span><span class="p">,</span><span class="w">
+          </span><span class="mi">720</span><span class="p">,</span><span class="w">
+          </span><span class="mi">730</span><span class="p">,</span><span class="w">
+          </span><span class="mi">740</span><span class="p">,</span><span class="w">
+          </span><span class="mi">750</span><span class="p">,</span><span class="w">
+          </span><span class="mi">760</span><span class="p">,</span><span class="w">
+          </span><span class="mi">770</span><span class="p">,</span><span class="w">
+          </span><span class="mi">780</span><span class="p">,</span><span class="w">
+          </span><span class="mi">790</span><span class="p">,</span><span class="w">
+          </span><span class="mi">800</span><span class="p">,</span><span class="w">
+          </span><span class="mi">810</span><span class="p">,</span><span class="w">
+          </span><span class="mi">820</span><span class="p">,</span><span class="w">
+          </span><span class="mi">830</span><span class="p">,</span><span class="w">
+          </span><span class="mi">840</span><span class="p">,</span><span class="w">
+          </span><span class="mi">850</span><span class="p">,</span><span class="w">
+          </span><span class="mi">860</span><span class="p">,</span><span class="w">
+          </span><span class="mi">870</span><span class="p">,</span><span class="w">
+          </span><span class="mi">880</span><span class="p">,</span><span class="w">
+          </span><span class="mi">890</span><span class="p">,</span><span class="w">
+          </span><span class="mi">900</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"session_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"acceptance_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"proposal_on_grid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Retrieve general information about specific negotiation. All you need to know is the negotiation id. This endpoint is intended to provide support for all the data required to render the negotiaion panel.</p>
+<h1 id='party'>Party</h1><h2 id='get-party'>Get Party</h2><h2 id='update-party'>Update Party</h2><h1 id='user'>User</h1><h2 id='get-user'>Get User</h2><h2 id='update-user'>Update User</h2><h2 id='create-user'>Create User</h2><h1 id='history'>History</h1><h2 id='get-all-entires'>Get all entires</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/history/:negotiation_id"</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12573</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entry_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"visible_concession"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GEORGE made an initial proposal of 500"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logged_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25 Jul 22:13"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 minutes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_colour"</span><span class="p">:</span><span class="w"> </span><span class="s2">"78BEF0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12574</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entry_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secret_acceptance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GEORGE updated their secret acceptance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logged_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25 Jul 22:13"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 minutes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_colour"</span><span class="p">:</span><span class="w"> </span><span class="s2">"78BEF0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12576</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entry_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted_framework"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GEORGE accepted the Framework"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logged_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25 Jul 22:13"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 minutes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_colour"</span><span class="p">:</span><span class="w"> </span><span class="s2">"78BEF0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12563</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entry_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"final_session"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Final session has been declared"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logged_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25 Jul 21:56"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19 minutes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_colour"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12559</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entry_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secret_acceptance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JILL updated their secret acceptance from 100 to 840"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logged_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25 Jul 21:39"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36 minutes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_colour"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BF607C"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12556</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entry_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"visible_concession"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JILL made an initial proposal of 840"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logged_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25 Jul 21:39"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36 minutes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_colour"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BF607C"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12557</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entry_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secret_acceptance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JILL updated their secret acceptance from 900 to 100"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logged_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20 Jul 22:40"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5 days"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_colour"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BF607C"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12564</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entry_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accepted_framework"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JILL accepted the Framework"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logged_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19 Jul 23:14"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6 days"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_colour"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BF607C"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12562</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entry_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"framework_updated"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JILL updated the Framework"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logged_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19 Jul 23:14"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6 days"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_colour"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BF607C"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12561</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entry_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"framework_updated"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JILL updated the Framework"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logged_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19 Jul 23:14"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6 days"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_colour"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BF607C"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12555</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entry_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"negotiation_created"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Negotiation was created"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">285</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"logged_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19 Jul 23:14"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6 days"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"party_colour"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Retrieve the history logs for a given negotiation and context of the currently authenticated party. All you need to know is the negotiation id.</p>
+<h1 id='automated-negotiation-actions'>Automated Negotiation Actions</h1>
+<p>You can pre schedule moves for each session and issue.</p>
+
+<p>Requires documentation.</p>
+<h1 id='private-reference-packages'>Private Reference Packages</h1>
+<p>Lets you create a series of packages based on multiple issues. Currently it is used to create acceptable payment plans and used to derive an acceptable present value.</p>
+
+<p>Requires documentation.</p>
 <h1 id='errors'>Errors</h1>
 <p>The Smartsettle API uses the following error codes:</p>
 
