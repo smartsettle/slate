@@ -41,7 +41,7 @@ Our API return JSON to all responses. Some of our API follows the <a href='http:
 
 Smartsettle uses your API key and email to authenticate with the API.
 
-Smartsettle expects for the API key and email to be included in all API requests to the server headers.
+Smartsettle expects your API key and email to be included in all API requests to the server. You can include key key pair in the request headers or as url parameters.
 
 > To authorize, use this code:
 
@@ -929,7 +929,7 @@ curl --get "https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/end_s
 
 End the session for this negotiation and the currently authenticated party.
 
-## Decalre Final Session
+## Declare Final Session
 
 > Sample Call
 
@@ -1065,7 +1065,7 @@ curl --get "https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/decla
 }
 ```
 
-Declare final session this negotiation and the currently authenticated party.
+Declare final session for this negotiation as the currently authenticated party.
 
 Parameter | Acceptable Values  | Required
 ---------- | -------  | -------
