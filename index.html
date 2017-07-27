@@ -246,7 +246,7 @@
                     <a href="#end-session" class="toc-h2 toc-link" data-title="Negotiation">End Session</a>
                   </li>
                   <li>
-                    <a href="#decalre-final-session" class="toc-h2 toc-link" data-title="Negotiation">Decalre Final Session</a>
+                    <a href="#declare-final-session" class="toc-h2 toc-link" data-title="Negotiation">Declare Final Session</a>
                   </li>
                   <li>
                     <a href="#declare-all-done" class="toc-h2 toc-link" data-title="Negotiation">Declare All Done</a>
@@ -333,7 +333,7 @@
 </span></code></pre><h1 id='authentication'>Authentication</h1>
 <p>Smartsettle uses your API key and email to authenticate with the API.</p>
 
-<p>Smartsettle expects for the API key and email to be included in all API requests to the server headers.</p>
+<p>Smartsettle expects your API key and email to be included in all API requests to the server. You can include key key pair in the request headers or as url parameters.</p>
 
 <blockquote>
 <p>To authorize, use this code:</p>
@@ -1268,7 +1268,7 @@ curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations?page
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>End the session for this negotiation and the currently authenticated party.</p>
-<h2 id='decalre-final-session'>Decalre Final Session</h2>
+<h2 id='declare-final-session'>Declare Final Session</h2>
 <blockquote>
 <p>Sample Call</p>
 </blockquote>
@@ -1401,7 +1401,7 @@ curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations?page
   </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Declare final session this negotiation and the currently authenticated party.</p>
+<p>Declare final session for this negotiation as the currently authenticated party.</p>
 
 <table><thead>
 <tr>
