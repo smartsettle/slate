@@ -209,7 +209,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo.png" class="logo" alt="Logo" />
+      <img src="images/logo.jpg" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
         </div>
@@ -299,6 +299,45 @@
             <a href="#private-reference-packages" class="toc-h1 toc-link" data-title="Private Reference Packages">Private Reference Packages</a>
           </li>
           <li>
+            <a href="#expert-neutral-negotiation" class="toc-h1 toc-link" data-title="Expert Neutral Negotiation">Expert Neutral Negotiation</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list-expert-neutral-negotiations" class="toc-h2 toc-link" data-title="Expert Neutral Negotiation">List Expert Neutral Negotiations</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#expert-neutral-values" class="toc-h1 toc-link" data-title="Expert Neutral Values">Expert Neutral Values</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#update-expert-neutral-values" class="toc-h2 toc-link" data-title="Expert Neutral Values">Update Expert Neutral Values</a>
+                  </li>
+                  <li>
+                    <a href="#destroy-expert-neutral-values" class="toc-h2 toc-link" data-title="Expert Neutral Values">Destroy Expert Neutral Values</a>
+                  </li>
+                  <li>
+                    <a href="#show-expert-neutral-values" class="toc-h2 toc-link" data-title="Expert Neutral Values">Show Expert Neutral Values</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#expert-neutral-profiles" class="toc-h1 toc-link" data-title="Expert Neutral Profiles">Expert Neutral Profiles</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list-expert-neutral-profiles" class="toc-h2 toc-link" data-title="Expert Neutral Profiles">List Expert Neutral Profiles</a>
+                  </li>
+                  <li>
+                    <a href="#create-expert-neutral-profiles" class="toc-h2 toc-link" data-title="Expert Neutral Profiles">Create Expert Neutral Profiles</a>
+                  </li>
+                  <li>
+                    <a href="#update-expert-neutral-profiles" class="toc-h2 toc-link" data-title="Expert Neutral Profiles">Update Expert Neutral Profiles</a>
+                  </li>
+                  <li>
+                    <a href="#destroy-expert-neutral-profiles" class="toc-h2 toc-link" data-title="Expert Neutral Profiles">Destroy Expert Neutral Profiles</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </div>
@@ -313,7 +352,7 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the Smartsettle API v1! You can use our API to access your negotiations, parties, and more! In the future we will support the negotiation intake and creation process.</p>
 
-<p>Our API return JSON to all responses. Some of our API follows the <a href='http://jsonapi.org/format/' target='_blank'>JSON API v1 Format</a>.</p>
+<p>Some of our API follows the <a href='http://jsonapi.org/format/' target='_blank'>JSON API v1 Format</a>.</p>
 
 <blockquote>
 <p>API responses will look like this:</p>
@@ -1835,7 +1874,60 @@ curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations?page
 <p>Lets you create a series of packages based on multiple issues. Currently it is used to create acceptable payment plans and used to derive an acceptable present value.</p>
 
 <p>Requires documentation.</p>
-<h1 id='errors'>Errors</h1>
+<h1 id='expert-neutral-negotiation'>Expert Neutral Negotiation</h1><h2 id='list-expert-neutral-negotiations'>List Expert Neutral Negotiations</h2>
+<p>Use the List Negotiations API endpoint in order retreive the availible cases that are pending END or have completed the END process. Passing account_role_id=&#39;expert_neutral&#39; as a parameter will automatically filter negotiations appropriately for use as an END case list.</p>
+<h1 id='expert-neutral-values'>Expert Neutral Values</h1><h2 id='update-expert-neutral-values'>Update Expert Neutral Values</h2>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Acceptable Values</th>
+<th>Result</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>expert_neutral_value</td>
+<td>String (required)</td>
+<td>The value the EN chooses as their opionion</td>
+<td>null</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --patch <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/expert_neutral_values/:issue_id?expert_neutral_value=450
+</span></code></pre><h2 id='destroy-expert-neutral-values'>Destroy Expert Neutral Values</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --delete <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/expert_neutral_values/:issue_id"</span>
+</code></pre><h2 id='show-expert-neutral-values'>Show Expert Neutral Values</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/expert_neutral_values/:issue_id"</span>
+</code></pre><h1 id='expert-neutral-profiles'>Expert Neutral Profiles</h1><h2 id='list-expert-neutral-profiles'>List Expert Neutral Profiles</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/expert_neutral_profiles"</span>
+</code></pre><h2 id='create-expert-neutral-profiles'>Create Expert Neutral Profiles</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --post <span class="s2">"https://go.smartsettle.com/api/v1/expert_neutral_profiles"</span>
+</code></pre><h2 id='update-expert-neutral-profiles'>Update Expert Neutral Profiles</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --put <span class="s2">"https://go.smartsettle.com/api/v1/expert_neutral_profiles/:id"</span>
+</code></pre><h2 id='destroy-expert-neutral-profiles'>Destroy Expert Neutral Profiles</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --delete <span class="s2">"https://go.smartsettle.com/api/v1/expert_neutral_profiles/:id"</span>
+</code></pre><h1 id='errors'>Errors</h1>
 <p>The Smartsettle API uses the following error codes:</p>
 
 <table><thead>
