@@ -18,7 +18,7 @@ search: true
 
 Welcome to the Smartsettle API v1! You can use our API to access your negotiations, parties, and more! In the future we will support the negotiation intake and creation process.
 
-Our API return JSON to all responses. Some of our API follows the <a href='http://jsonapi.org/format/' target='_blank'>JSON API v1 Format</a>.
+Some of our API follows the <a href='http://jsonapi.org/format/' target='_blank'>JSON API v1 Format</a>.
 
 > API responses will look like this:
 
@@ -1515,3 +1515,72 @@ Requires documentation.
 Lets you create a series of packages based on multiple issues. Currently it is used to create acceptable payment plans and used to derive an acceptable present value.
 
 Requires documentation.
+
+# Expert Neutral Negotiation
+
+## List Expert Neutral Negotiations
+Use the List Negotiations API endpoint in order retreive the availible cases that are pending END or have completed the END process. Passing account_role_id='expert_neutral' as a parameter will automatically filter negotiations appropriately for use as an END case list.
+
+# Expert Neutral Values
+
+## Update Expert Neutral Values
+
+Parameter | Acceptable Values | Result | Default
+---------- | ------- | ------- | -------
+expert_neutral_value | String (required) | The value the EN chooses as their opionion | null
+
+> Sample Call
+
+```shell
+curl --patch "https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/expert_neutral_values/:issue_id?expert_neutral_value=450
+```
+
+## Destroy Expert Neutral Values
+
+> Sample Call
+
+```shell
+curl --delete "https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/expert_neutral_values/:issue_id"
+```
+
+## Show Expert Neutral Values
+
+> Sample Call
+
+```shell
+curl --get "https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/expert_neutral_values/:issue_id"
+```
+
+# Expert Neutral Profiles
+
+## List Expert Neutral Profiles
+
+> Sample Call
+
+```shell
+curl --get "https://go.smartsettle.com/api/v1/expert_neutral_profiles"
+```
+
+## Create Expert Neutral Profiles
+
+> Sample Call
+
+```shell
+curl --post "https://go.smartsettle.com/api/v1/expert_neutral_profiles"
+```
+
+## Update Expert Neutral Profiles
+
+> Sample Call
+
+```shell
+curl --put "https://go.smartsettle.com/api/v1/expert_neutral_profiles/:id"
+```
+
+## Destroy Expert Neutral Profiles
+
+> Sample Call
+
+```shell
+curl --delete "https://go.smartsettle.com/api/v1/expert_neutral_profiles/:id"
+```
