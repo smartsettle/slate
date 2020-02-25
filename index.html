@@ -222,6 +222,28 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
+            <a href="#general-usage-strategies" class="toc-h1 toc-link" data-title="General Usage Strategies">General Usage Strategies</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#whitelabel" class="toc-h2 toc-link" data-title="General Usage Strategies">Whitelabel</a>
+                  </li>
+                  <li>
+                    <a href="#standalone-slider-widget-slider-js-api-whitelabel-configuration-tools-insights" class="toc-h2 toc-link" data-title="General Usage Strategies">Standalone Slider Widget (slider.js) + API + Whitelabel (configuration/tools/insights)</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#javascript-widgets" class="toc-h1 toc-link" data-title="Javascript Widgets">Javascript Widgets</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#negotiations-slider" class="toc-h2 toc-link" data-title="Javascript Widgets">Negotiations Slider</a>
+                  </li>
+                  <li>
+                    <a href="#agreement-framework-viewer" class="toc-h2 toc-link" data-title="Javascript Widgets">Agreement Framework Viewer</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
@@ -256,6 +278,20 @@
                   </li>
                   <li>
                     <a href="#negotiation-status" class="toc-h2 toc-link" data-title="Negotiation">Negotiation Status</a>
+                  </li>
+                  <li>
+                    <a href="#update-framework-acceptance" class="toc-h2 toc-link" data-title="Negotiation">Update Framework Acceptance</a>
+                  </li>
+                  <li>
+                    <a href="#create-negotiation" class="toc-h2 toc-link" data-title="Negotiation">Create Negotiation</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#issue" class="toc-h1 toc-link" data-title="Issue">Issue</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#update-preference" class="toc-h2 toc-link" data-title="Issue">Update Preference</a>
                   </li>
               </ul>
           </li>
@@ -294,9 +330,14 @@
           </li>
           <li>
             <a href="#automated-negotiation-actions" class="toc-h1 toc-link" data-title="Automated Negotiation Actions">Automated Negotiation Actions</a>
-          </li>
-          <li>
-            <a href="#private-reference-packages" class="toc-h1 toc-link" data-title="Private Reference Packages">Private Reference Packages</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list-automated-negotiation-actions" class="toc-h2 toc-link" data-title="Automated Negotiation Actions">List Automated Negotiation Actions</a>
+                  </li>
+                  <li>
+                    <a href="#bulk-update-create-automated-negotiation-actions" class="toc-h2 toc-link" data-title="Automated Negotiation Actions">Bulk Update/Create Automated Negotiation Actions</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#expert-neutral-negotiation" class="toc-h1 toc-link" data-title="Expert Neutral Negotiation">Expert Neutral Negotiation</a>
@@ -338,6 +379,14 @@
               </ul>
           </li>
           <li>
+            <a href="#additional-resources" class="toc-h1 toc-link" data-title="Additional Resources">Additional Resources</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#ruby-api-wrapper-example" class="toc-h2 toc-link" data-title="Additional Resources">Ruby API Wrapper Example</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </div>
@@ -350,9 +399,11 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Smartsettle API v1! You can use our API to access your negotiations, parties, and more! In the future we will support the negotiation intake and creation process.</p>
+<p>Welcome to the Smartsettle API v1! You can use our API to access your negotiations, parties, and more!</p>
 
 <p>Some of our API follows the <a href='http://jsonapi.org/format/' target='_blank'>JSON API v1 Format</a>.</p>
+
+<p>If you need help with anything contained in the documentation, please reach out to <a href="mailto:developer.support@smartsettle.com">developer.support@smartsettle.com</a>.</p>
 
 <blockquote>
 <p>API responses will look like this:</p>
@@ -369,7 +420,112 @@
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h1 id='authentication'>Authentication</h1>
+</span></code></pre><h1 id='general-usage-strategies'>General Usage Strategies</h1><h2 id='whitelabel'>Whitelabel</h2>
+<p>Quickly get started using Smartsettle ONE to handle negotiations. Adjust our existing web application branding and case intake process to fit your needs. We deploy your app instance to its own hardware stack at any of the major cloud providers to suite your specifc requirements. There are various Single Sign On (SSO) solutions we can impletment for your users in order to provide a seamless transition to and from your existing web application. This solution may not require any software development on your end.</p>
+<h2 id='standalone-slider-widget-slider-js-api-whitelabel-configuration-tools-insights'>Standalone Slider Widget (slider.js) + API + Whitelabel (configuration/tools/insights)</h2>
+<p>Drop our negotiation javascript solution into your existing intake and case management process. Use our API to initalize and retreive existing data. Use whitelabel account management interface to build your own negotiation scenarios. This strategy provides the most seamless integration of our negotiation solution into your own application.</p>
+
+<p><img src="images/slider2.png" alt="Slider2" /></p>
+<h3 id='general-configuration'>General Configuration</h3>
+<p>Some configuration within the whitelabel application is required before the slider can be rendered:</p>
+<h4 id='1-create-at-least-one-negotiation-template'>1. Create at least one Negotiation Template</h4>
+<p>A negotiation template defines a specific scenario: default party names, default issues, party intake steps, and an associated Agreement Framework. The party intake steps are only relevant to the whitelabel use case. In the </p>
+<h4 id='2-use-one-of-our-default-agreement-frameworks-or-create-your-own'>2. Use one of our default Agreement Frameworks or create your own</h4>
+<p>All Negotiation Templates need an associated Agreement Framework. The agreement framework step is optional but recommended. All parties need to agree to the Framework before a Negotiation can be carried out. If you wish to skip this requirement, it is possible to automate this for both parties. </p>
+<h4 id='3-configure-your-expert-neutral-deal-closer-end-preferences-in-the-account-settings-area-it-is-possible-to-disable-this-feature-if-desired'>3. Configure your Expert Neutral Deal-closer (END) preferences in the account settings area. It is possible to disable this feature if desired.</h4><h4 id='4-create-sync-users-with-the-smartsettle-one-whitelabel-instance'>4. Create/Sync Users with the Smartsettle ONE whitelabel instance.</h4><h3 id='slider-integration-steps'>Slider integration steps</h3>
+<blockquote>
+<p>Sample Ruby Implementation</p>
+</blockquote>
+<pre class="highlight ruby tab-ruby"><code><span class="c1"># Step 1</span>
+<span class="vi">@negotiation</span> <span class="o">=</span> <span class="no">SmartsettleApi</span><span class="p">.</span><span class="nf">user</span><span class="p">(</span><span class="n">current_user</span><span class="p">).</span><span class="nf">create_negotiation</span><span class="p">(</span><span class="s2">"mode"</span><span class="p">:</span> <span class="s2">"normal"</span><span class="p">,</span>
+                                                                    <span class="s2">"negotiation_template_id"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+                                                                    <span class="s2">"name"</span><span class="p">:</span> <span class="s1">'Case 123: Party A v Party B'</span>
+                                                                    <span class="s2">"invitee_party_email"</span><span class="p">:</span> <span class="s1">'party_a@example.com'</span><span class="p">,</span>
+                                                                    <span class="s2">"creator_short_name"</span><span class="p">:</span> <span class="s1">'Party B'</span><span class="p">,</span>
+                                                                    <span class="s2">"invitee_party_short_name"</span><span class="p">:</span> <span class="s2">"Party A"</span><span class="p">)</span>
+
+<span class="c1"># Step 2</span>
+<span class="vi">@negotiation</span><span class="p">.</span><span class="nf">issue_ids</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">issue_id</span><span class="o">|</span>
+  <span class="no">SmartsettleApi</span><span class="p">.</span><span class="nf">user</span><span class="p">(</span><span class="n">current_user</span><span class="p">).</span><span class="nf">update_issue_preferences</span><span class="p">(</span><span class="n">issue_id</span><span class="p">,</span> <span class="ss">user: </span><span class="mi">1000</span><span class="p">,</span> <span class="ss">opponent: </span><span class="mi">0</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="c1"># Step 3</span>
+<span class="no">SmartsettleApi</span><span class="p">.</span><span class="nf">user</span><span class="p">(</span><span class="n">current_user</span><span class="p">).</span><span class="nf">update_framework_acceptance</span><span class="p">(</span><span class="vi">@negotiation</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span> <span class="ss">status: </span><span class="s1">'accept'</span><span class="p">)</span>
+<span class="no">SmartsettleApi</span><span class="p">.</span><span class="nf">user</span><span class="p">(</span><span class="n">opponent</span><span class="p">).</span><span class="nf">update_framework_acceptance</span><span class="p">(</span><span class="vi">@negotiation</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span> <span class="ss">status: </span><span class="s1">'accept'</span><span class="p">)</span>
+
+<span class="c1"># Step 4</span>
+<span class="n">redirect_to</span> <span class="s2">"/dashboard/negotiations/</span><span class="si">#{</span><span class="vi">@negotiation</span><span class="p">.</span><span class="nf">id</span><span class="si">}</span><span class="s2">"</span>
+</code></pre>
+<p>Before the slider can be rendered, you need a Negotiation with all the details required for a negotiation completed.</p>
+
+<p>The steps required to integrate the slider.js into your own app might look like this:</p>
+
+<ol>
+<li>Create the negotiation using the API <strong>Negotiation -&gt; Create</strong> endpoint.</li>
+<li>Set the issues preferences for each of the parties and issues using the API <strong>Negotiation -&gt; Update Issue Preference</strong> endpoint.</li>
+<li>Update the Framework acceptance for each of the parties using the API <strong>Negotiation -&gt; Update Framework Acceptance</strong> endpoint. This is generally hooked up the action were parties both agree to the draft Framework. (Optional, you can do this behind the scenes in order to skip this step. In ONE, both parties must agree to the issues and inital negotiating ranges before the negotiation can begin.)</li>
+<li>Render the slider.js (see <a href="#standalone-slider-widget-slider-js-api-whitelabel-configuration-tools-insights">Standalone Slider Widget</a>)</li>
+</ol>
+<h1 id='javascript-widgets'>Javascript Widgets</h1><h2 id='negotiations-slider'>Negotiations Slider</h2><h3 id='integrate-the-smartsettle-one-slider-into-your-own-site'>Integrate the Smartsettle ONE Slider into your own site</h3><h3 id='overview'>Overview</h3>
+<p>You can allow users to realize Smartsettle ONE negotiations directly on your own site. By adding a few lines of HTML and Javascript you can include the slider on a page so your users can negotiate on a specific case using the slider.</p>
+<h3 id='including-the-slider'>Including the slider</h3>
+<p>Include the necessary slider JS and CSS files on the page you want to show the slider as shown in the following HTML snippet.</p>
+
+<blockquote>
+<p>Include the necessary slider JS and CSS</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="c">&lt;!-- Include this line in the head --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://smartsettle-public.s3.ca-central-1.amazonaws.com/slider/2/slider.css"</span> <span class="nt">/&gt;</span>
+
+<span class="c">&lt;!-- Include this line at the end of the body --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://smartsettle-public.s3.ca-central-1.amazonaws.com/slider/2/slider.slim.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+<p>Now we just need to create an instance of the slider. In order to do that we need to know: </p>
+
+<ul>
+<li>The URL pointing to the API it should get it&#39;s data from</li>
+<li>The ID of the negotiation case it should display</li>
+<li>The credentials for the user interacting with the slider</li>
+</ul>
+
+<blockquote>
+<p>Create an instance of the slider</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code> <span class="kd">var</span> <span class="nx">apiEndpoint</span> <span class="o">=</span> <span class="s1">'https://go.smartsettle.com/api/v1'</span><span class="p">;</span>
+
+ <span class="k">new</span> <span class="nx">SmartsettlePanel</span><span class="p">(</span>
+   <span class="s1">'#element-id'</span><span class="p">,</span>      <span class="c1">// HTML node id. Slider will be placed here.</span>
+   <span class="nx">apiEndpoint</span><span class="p">,</span>        <span class="c1">// API for the data</span>
+   <span class="mi">2470</span><span class="p">,</span>               <span class="c1">// Id of the negotiation</span>
+   <span class="s1">'user@example.com'</span><span class="p">,</span> <span class="c1">// User identifier</span>
+   <span class="s1">'users-api-key'</span>     <span class="c1">// ONE API key for user</span>
+ <span class="p">);</span>
+</code></pre>
+<p>Replace all the parameters for SmartsettlePanel with values that would make sense in your context. Now you should be able to see the slider on your page. Enjoy! </p>
+
+<blockquote>
+<p>You might also need to include the following JS and CSS</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="c">&lt;!-- 
+NOTE:
+The above HTML assumes you're already using and including Bootstrap 3 and JQuery. 
+The slider has several modal dialogs which currently depend on these two. 
+If you're not using Bootstrap 3 and JQuery you should add them at least on 
+the page you want to show the slider. The following lines include the necessary 
+slider JS and CSS files for Bootstrap 3, JQuery and the Slider itself.
+--&gt;</span>
+
+<span class="c">&lt;!-- In header --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.css"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://smartsettle-public.s3.ca-central-1.amazonaws.com/slider/2/slider.css"</span> <span class="nt">/&gt;</span>
+
+<span class="c">&lt;!-- At end of body --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-1.12.4.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span> 
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://smartsettle-public.s3.ca-central-1.amazonaws.com/slider/2/slider.slim.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre><h2 id='agreement-framework-viewer'>Agreement Framework Viewer</h2><h3 id='coming-soon'>Coming Soon!</h3>
+<p>This widget will allow parties to view and accept the agreement framework for a specific negotiation.</p>
+<h1 id='authentication'>Authentication</h1>
 <p>Smartsettle uses your API key and email to authenticate with the API.</p>
 
 <p>Smartsettle expects your API key and email to be included in all API requests to the server. You can include key key pair in the request headers or as url parameters.</p>
@@ -1754,7 +1910,86 @@ curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations?page
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retrieve general information about specific negotiation. All you need to know is the negotiation id. This endpoint is intended to provide support for all the data required to render the negotiaion panel.</p>
-<h1 id='party'>Party</h1><h2 id='get-party'>Get Party</h2><h2 id='update-party'>Update Party</h2><h1 id='user'>User</h1><h2 id='get-user'>Get User</h2><h2 id='update-user'>Update User</h2><h2 id='create-user'>Create User</h2><h1 id='history'>History</h1><h2 id='get-all-entires'>Get all entires</h2>
+<h2 id='update-framework-acceptance'>Update Framework Acceptance</h2><h2 id='create-negotiation'>Create Negotiation</h2>
+<p>A administrator</p>
+
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --post <span class="s2">"https://go.smartsettle.com/api/v1/negotiations"</span>
+</code></pre>
+<blockquote>
+<p>Sample Payload</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"negotiation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"normal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party123 vs. BigCorp777"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"negotiation_template_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"invitee_party_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"party123@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"creator_short_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Big Corp"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"invitee_party_short_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Party 123"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The response from the creation endpoint will be the new negotiation as a json object.</p>
+<h1 id='issue'>Issue</h1><h2 id='update-preference'>Update Preference</h2>
+<p>This endpoint is called using a specifc users API creds. That user would be one party of the negotiation.</p>
+
+<blockquote>
+<p>Sample Payload</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">id</span><span class="p">:</span><span class="w"> </span><span class="err">issue_id</span><span class="p">,</span><span class="w">
+  </span><span class="err">user</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+  </span><span class="err">opponent</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --put <span class="s2">"https://go.smartsettle.com/api/v1/issues/#{id}/update_preferences"</span>
+</code></pre><h1 id='party'>Party</h1><h2 id='get-party'>Get Party</h2><h2 id='update-party'>Update Party</h2><h1 id='user'>User</h1><h2 id='get-user'>Get User</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/users/:id"</span>
+</code></pre><h2 id='update-user'>Update User</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --put <span class="s2">"https://go.smartsettle.com/api/v1/users/:id"</span>
+</code></pre><h2 id='create-user'>Create User</h2>
+<p>Creating a User only requries an email address.</p>
+
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --post <span class="s2">"https://go.smartsettle.com/api/v1/users"</span>
+</code></pre><h3 id='important'>Important</h3>
+<p>After creating a User via the API, be sure to store the email and authentication_token (API token). The email + token will allow you to perform API calls on behalf of the User and render widgets using this Users context.</p>
+
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"user"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">92</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"tony@example.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"mobile_number"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"completed_setup"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"admin"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"facilitator"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"expert_neutral"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"locale"</span><span class="p">:</span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_type"</span><span class="p">:</span><span class="s2">"normal"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"times_invited"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"prompt_stripe_config"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"authentication_token"</span><span class="p">:</span><span class="s2">"K_cHF1ZqW_jsvzgwyRdv"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h1 id='history'>History</h1><h2 id='get-all-entires'>Get all entires</h2>
 <blockquote>
 <p>Sample Call</p>
 </blockquote>
@@ -1868,13 +2103,224 @@ curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations?page
 <p>Retrieve the history logs for a given negotiation and context of the currently authenticated party. All you need to know is the negotiation id.</p>
 <h1 id='automated-negotiation-actions'>Automated Negotiation Actions</h1>
 <p>You can pre schedule moves for each session and issue.</p>
-
-<p>Requires documentation.</p>
-<h1 id='private-reference-packages'>Private Reference Packages</h1>
-<p>Lets you create a series of packages based on multiple issues. Currently it is used to create acceptable payment plans and used to derive an acceptable present value.</p>
-
-<p>Requires documentation.</p>
-<h1 id='expert-neutral-negotiation'>Expert Neutral Negotiation</h1><h2 id='list-expert-neutral-negotiations'>List Expert Neutral Negotiations</h2>
+<h2 id='list-automated-negotiation-actions'>List Automated Negotiation Actions</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/automated_negotiation_actions"</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> 
+   </span><span class="s2">"automated_negotiation_actions"</span><span class="p">:[</span><span class="w"> 
+      </span><span class="p">{</span><span class="w"> 
+         </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">680</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"session"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"comment"</span><span class="p">:</span><span class="s2">"This is my best offer"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"final"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="mi">337</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"party_id"</span><span class="p">:</span><span class="mi">571</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"completed"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"errors"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"not_played"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"automated_issue_actions"</span><span class="p">:[</span><span class="w"> 
+            </span><span class="p">{</span><span class="w"> 
+               </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">680</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="mi">282</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"visible"</span><span class="p">:</span><span class="s2">"12000"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"secret"</span><span class="p">:</span><span class="s2">"11000"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"private_reference_package_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"automatic_deal_closer"</span><span class="p">:</span><span class="s2">"500"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> 
+         </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">681</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"session"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"comment"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"final"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="mi">337</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"party_id"</span><span class="p">:</span><span class="mi">571</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"completed"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"errors"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"not_played"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"automated_issue_actions"</span><span class="p">:[</span><span class="w"> 
+            </span><span class="p">{</span><span class="w"> 
+               </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">681</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="mi">282</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"visible"</span><span class="p">:</span><span class="s2">"11000"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"secret"</span><span class="p">:</span><span class="s2">"10000"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"private_reference_package_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"automatic_deal_closer"</span><span class="p">:</span><span class="s2">"500"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> 
+         </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">679</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"session"</span><span class="p">:</span><span class="mi">99</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"comment"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"final"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="mi">337</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"party_id"</span><span class="p">:</span><span class="mi">571</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"completed"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"errors"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"not_played"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"automated_issue_actions"</span><span class="p">:[</span><span class="w"> 
+            </span><span class="p">{</span><span class="w"> 
+               </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">679</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="mi">282</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"visible"</span><span class="p">:</span><span class="s2">"10000"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"secret"</span><span class="p">:</span><span class="s2">"9500"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"private_reference_package_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"automatic_deal_closer"</span><span class="p">:</span><span class="s2">"500"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h2 id='bulk-update-create-automated-negotiation-actions'>Bulk Update/Create Automated Negotiation Actions</h2>
+<blockquote>
+<p>Sample Call</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --put <span class="s2">"https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/automated_negotiation_actions/bulk_update"</span>
+</code></pre>
+<blockquote>
+<p>Sample Request Payload</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> 
+   </span><span class="s2">"negotiation"</span><span class="p">:{</span><span class="w"> 
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"337"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"automated_negotiation_actions_attributes"</span><span class="p">:[</span><span class="w"> 
+         </span><span class="p">{</span><span class="w"> 
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"680"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"session"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"comment"</span><span class="p">:</span><span class="s2">"This is my best offer"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"final"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="s2">"337"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"party_id"</span><span class="p">:</span><span class="s2">"571"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"completed"</span><span class="p">:</span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"errors"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"not_played"</span><span class="p">:</span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"automated_issue_actions"</span><span class="p">:[</span><span class="w"> 
+               </span><span class="p">{</span><span class="w"> 
+                  </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"680"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="s2">"282"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"visible"</span><span class="p">:</span><span class="s2">"12000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"secret"</span><span class="p">:</span><span class="s2">"11000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"private_reference_package_id"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"automatic_deal_closer"</span><span class="p">:</span><span class="s2">"500"</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"automated_issue_actions_attributes"</span><span class="p">:[</span><span class="w"> 
+               </span><span class="p">{</span><span class="w"> 
+                  </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"680"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="s2">"282"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"visible"</span><span class="p">:</span><span class="s2">"12000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"secret"</span><span class="p">:</span><span class="s2">"11000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"private_reference_package_id"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"automatic_deal_closer"</span><span class="p">:</span><span class="s2">"500"</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w"> 
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"681"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"session"</span><span class="p">:</span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"comment"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"final"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="s2">"337"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"party_id"</span><span class="p">:</span><span class="s2">"571"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"completed"</span><span class="p">:</span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"errors"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"not_played"</span><span class="p">:</span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"automated_issue_actions"</span><span class="p">:[</span><span class="w"> 
+               </span><span class="p">{</span><span class="w"> 
+                  </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"681"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="s2">"282"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"visible"</span><span class="p">:</span><span class="s2">"11000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"secret"</span><span class="p">:</span><span class="s2">"10000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"private_reference_package_id"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"automatic_deal_closer"</span><span class="p">:</span><span class="s2">"500"</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"automated_issue_actions_attributes"</span><span class="p">:[</span><span class="w"> 
+               </span><span class="p">{</span><span class="w"> 
+                  </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"681"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="s2">"282"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"visible"</span><span class="p">:</span><span class="s2">"11000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"secret"</span><span class="p">:</span><span class="s2">"10000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"private_reference_package_id"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"automatic_deal_closer"</span><span class="p">:</span><span class="s2">"500"</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w"> 
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"683"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"session"</span><span class="p">:</span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"comment"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"final"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="s2">"337"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"party_id"</span><span class="p">:</span><span class="s2">"571"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"completed"</span><span class="p">:</span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"errors"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"not_played"</span><span class="p">:</span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"automated_issue_actions"</span><span class="p">:[</span><span class="w"> 
+               </span><span class="p">{</span><span class="w"> 
+                  </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"683"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="s2">"282"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"visible"</span><span class="p">:</span><span class="s2">"9000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"secret"</span><span class="p">:</span><span class="s2">"8000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"private_reference_package_id"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"automatic_deal_closer"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"_destroy"</span><span class="p">:</span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"automated_issue_actions_attributes"</span><span class="p">:[</span><span class="w"> 
+               </span><span class="p">{</span><span class="w"> 
+                  </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"683"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="s2">"282"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"visible"</span><span class="p">:</span><span class="s2">"9000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"secret"</span><span class="p">:</span><span class="s2">"8000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"private_reference_package_id"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"automatic_deal_closer"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w"> 
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"679"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"session"</span><span class="p">:</span><span class="s2">"99"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"comment"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"final"</span><span class="p">:</span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"negotiation_id"</span><span class="p">:</span><span class="s2">"337"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"party_id"</span><span class="p">:</span><span class="s2">"571"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"completed"</span><span class="p">:</span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"errors"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"not_played"</span><span class="p">:</span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"automated_issue_actions"</span><span class="p">:[</span><span class="w"> 
+               </span><span class="p">{</span><span class="w"> 
+                  </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"679"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="s2">"282"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"visible"</span><span class="p">:</span><span class="s2">"10000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"secret"</span><span class="p">:</span><span class="s2">"9500"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"private_reference_package_id"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"automatic_deal_closer"</span><span class="p">:</span><span class="s2">"500"</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"automated_issue_actions_attributes"</span><span class="p">:[</span><span class="w"> 
+               </span><span class="p">{</span><span class="w"> 
+                  </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"679"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"issue_id"</span><span class="p">:</span><span class="s2">"282"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"visible"</span><span class="p">:</span><span class="s2">"10000"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"secret"</span><span class="p">:</span><span class="s2">"9500"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"private_reference_package_id"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"automatic_deal_closer"</span><span class="p">:</span><span class="s2">"500"</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+         </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h1 id='expert-neutral-negotiation'>Expert Neutral Negotiation</h1><h2 id='list-expert-neutral-negotiations'>List Expert Neutral Negotiations</h2>
 <p>Use the List Negotiations API endpoint in order retreive the availible cases that are pending END or have completed the END process. Passing account_role_id=&#39;expert_neutral&#39; as a parameter will automatically filter negotiations appropriately for use as an END case list.</p>
 <h1 id='expert-neutral-values'>Expert Neutral Values</h1><h2 id='update-expert-neutral-values'>Update Expert Neutral Values</h2>
 <table><thead>
@@ -1927,6 +2373,248 @@ curl --get <span class="s2">"https://go.smartsettle.com/api/v1/negotiations?page
 <p>Sample Call</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl --delete <span class="s2">"https://go.smartsettle.com/api/v1/expert_neutral_profiles/:id"</span>
+</code></pre><h1 id='additional-resources'>Additional Resources</h1><h2 id='ruby-api-wrapper-example'>Ruby API Wrapper Example</h2><pre class="highlight ruby tab-ruby"><code><span class="k">class</span> <span class="nc">SmartsettleApi</span>
+
+  <span class="k">class</span> <span class="nc">SignUpError</span> <span class="o">&lt;</span> <span class="no">StandardError</span><span class="p">;</span> <span class="k">end</span>
+  <span class="k">class</span> <span class="nc">UserValidationError</span> <span class="o">&lt;</span> <span class="no">StandardError</span><span class="p">;</span> <span class="k">end</span>
+  <span class="k">class</span> <span class="nc">GeneralError</span> <span class="o">&lt;</span> <span class="no">StandardError</span><span class="p">;</span> <span class="k">end</span>
+
+  <span class="kp">include</span> <span class="no">HTTParty</span>
+
+  <span class="n">default_timeout</span> <span class="mi">30</span>
+  <span class="n">open_timeout</span> <span class="mi">30</span>
+  <span class="n">read_timeout</span> <span class="mi">30</span>
+
+  <span class="n">base_uri</span><span class="p">((</span><span class="no">Rails</span><span class="p">.</span><span class="nf">env</span><span class="p">.</span><span class="nf">development?</span> <span class="p">?</span> <span class="s1">'http://'</span> <span class="p">:</span> <span class="s1">'https://'</span><span class="p">)</span> <span class="o">+</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">secrets</span><span class="p">.</span><span class="nf">smartsettle_api_domain</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="c1"># NOTE: Need to merge these options in all API call functions ;)</span>
+    <span class="vi">@options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">headers: </span><span class="p">{</span> <span class="s1">'X-User-Email'</span><span class="p">:</span> <span class="n">user</span><span class="p">,</span> <span class="s1">'X-User-Token'</span><span class="p">:</span> <span class="n">key</span> <span class="p">}</span> <span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">admin_api</span>
+    <span class="c1"># NOTE: Uses any Whitelabel admins API key</span>
+    <span class="vi">@admin_api</span> <span class="o">||=</span> <span class="kp">new</span><span class="p">(</span><span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">secrets</span><span class="p">.</span><span class="nf">smartsettle_username</span><span class="p">,</span>
+                       <span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">secrets</span><span class="p">.</span><span class="nf">smartsettle_api_key</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="vi">@user_api</span> <span class="o">=</span> <span class="kp">new</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">smartsettle_email</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="nf">smartsettle_key</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="c1">#</span>
+  <span class="c1"># Admin API Calls</span>
+  <span class="c1">#</span>
+  <span class="c1"># NOTE: An admin API key will be required to use and admin API endpoints</span>
+  <span class="c1">#</span>
+
+  <span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="p">{</span> <span class="ss">user: </span><span class="n">params</span> <span class="p">})</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s2">"/users"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">list_negotiation_templates</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="n">params</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">"/negotiation_templates"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="no">Rails</span><span class="p">.</span><span class="nf">logger</span><span class="p">.</span><span class="nf">info</span> <span class="n">response</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="o">==</span> <span class="mi">200</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">json</span><span class="p">.</span><span class="nf">present?</span>
+        <span class="n">json</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+          <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+          <span class="n">os</span><span class="p">.</span><span class="nf">id</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="s1">'id'</span><span class="p">].</span><span class="nf">to_i</span>
+          <span class="n">results</span> <span class="o">&lt;&lt;</span> <span class="n">os</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">else</span>
+      <span class="n">results</span>
+    <span class="k">end</span>
+
+    <span class="n">results</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">get_negotiation_template</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="p">{</span> <span class="ss">negotiation: </span><span class="n">params</span> <span class="p">})</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">"/negotiation_templates/</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+    <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span>
+
+    <span class="no">Rails</span><span class="p">.</span><span class="nf">logger</span><span class="p">.</span><span class="nf">info</span> <span class="n">response</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="o">==</span> <span class="mi">200</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+      <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="n">os</span>
+  <span class="k">end</span>
+
+  <span class="c1">#</span>
+  <span class="c1"># Admin Expert Neutral API Calls</span>
+  <span class="c1">#</span>
+  <span class="k">def</span> <span class="nf">create_expert_neutral_profile</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="n">params</span><span class="p">[</span><span class="ss">:user_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_id</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="p">{</span> <span class="ss">expert_neutral_profile: </span><span class="n">params</span> <span class="p">},</span> <span class="ss">follow_redirects: </span><span class="kp">false</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s2">"/expert_neutral_profiles"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+    <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span>
+
+    <span class="no">Rails</span><span class="p">.</span><span class="nf">logger</span><span class="p">.</span><span class="nf">info</span> <span class="n">response</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="o">==</span> <span class="mi">200</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+      <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="n">os</span>
+  <span class="k">end</span>
+
+  <span class="c1">#</span>
+  <span class="c1"># User Expert Neutral API Calls</span>
+  <span class="c1">#</span>
+  <span class="k">def</span> <span class="nf">get_end_details</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="p">{</span> <span class="ss">negotiation: </span><span class="n">params</span> <span class="p">})</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">"/negotiations/</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">/end_details"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+    <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span>
+
+    <span class="no">Rails</span><span class="p">.</span><span class="nf">logger</span><span class="p">.</span><span class="nf">info</span> <span class="n">response</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="o">==</span> <span class="mi">200</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+      <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s1">'negotiation'</span><span class="p">])</span>
+    <span class="k">end</span>
+
+    <span class="n">os</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">update_expert_neural_value</span><span class="p">(</span><span class="n">issue_id</span><span class="p">,</span> <span class="n">negotiation_id</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="n">params</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">put</span><span class="p">(</span><span class="s2">"/negotiations/</span><span class="si">#{</span><span class="n">negotiation_id</span><span class="si">}</span><span class="s2">/expert_neutral_values/</span><span class="si">#{</span><span class="n">issue_id</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+
+    <span class="no">Rails</span><span class="p">.</span><span class="nf">logger</span><span class="p">.</span><span class="nf">info</span> <span class="n">response</span>
+
+    <span class="n">json</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span> <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="o">==</span> <span class="mi">200</span>
+
+    <span class="n">json</span>
+  <span class="k">end</span>
+
+  <span class="c1">#</span>
+  <span class="c1"># User Negotiation API Calls</span>
+  <span class="c1">#</span>
+  <span class="k">def</span> <span class="nf">list_negotiations</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="n">params</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">"/negotiations"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="no">Rails</span><span class="p">.</span><span class="nf">logger</span><span class="p">.</span><span class="nf">info</span> <span class="n">response</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="o">==</span> <span class="mi">200</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">json</span><span class="p">[</span><span class="s1">'data'</span><span class="p">].</span><span class="nf">present?</span>
+        <span class="n">json</span><span class="p">[</span><span class="s1">'data'</span><span class="p">].</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+          <span class="n">results</span> <span class="o">&lt;&lt;</span> <span class="n">attributes_to_os</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">else</span>
+      <span class="n">results</span>
+    <span class="k">end</span>
+
+    <span class="n">results</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">create_negotiation</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="p">{</span> <span class="ss">negotiation: </span><span class="n">params</span> <span class="p">})</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s2">"/negotiations"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+    <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+
+    <span class="no">Rails</span><span class="p">.</span><span class="nf">logger</span><span class="p">.</span><span class="nf">info</span> <span class="n">response</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="o">==</span> <span class="mi">200</span>
+      <span class="k">unless</span> <span class="n">json</span><span class="p">[</span><span class="s1">'errors'</span><span class="p">].</span><span class="nf">present?</span>
+        <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s1">'negotiation'</span><span class="p">])</span>
+      <span class="k">else</span>
+        <span class="k">return</span> <span class="n">json</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="n">os</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">get_negotiation</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="p">{</span> <span class="ss">negotiation: </span><span class="n">params</span> <span class="p">})</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">"/negotiations/</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+    <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span>
+
+    <span class="no">Rails</span><span class="p">.</span><span class="nf">logger</span><span class="p">.</span><span class="nf">info</span> <span class="n">response</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="o">==</span> <span class="mi">200</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+      <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s1">'negotiation'</span><span class="p">])</span>
+    <span class="k">end</span>
+
+    <span class="n">os</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">get_negotiation_status</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="p">{</span> <span class="ss">negotiation: </span><span class="n">params</span> <span class="p">})</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">"/negotiations/</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">/negotiation_status"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+    <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span>
+
+    <span class="no">Rails</span><span class="p">.</span><span class="nf">logger</span><span class="p">.</span><span class="nf">info</span> <span class="n">response</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="o">==</span> <span class="mi">200</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+      <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s1">'negotiation'</span><span class="p">])</span>
+    <span class="k">end</span>
+
+    <span class="n">os</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">update_framework_acceptance</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="n">params</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">put</span><span class="p">(</span><span class="s2">"/negotiations/</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">/framework_acceptance"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+
+    <span class="no">Rails</span><span class="p">.</span><span class="nf">logger</span><span class="p">.</span><span class="nf">info</span> <span class="n">response</span>
+
+    <span class="n">json</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span> <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="o">==</span> <span class="mi">200</span>
+
+    <span class="n">json</span>
+  <span class="k">end</span>
+
+  <span class="c1">#</span>
+  <span class="c1"># User Issue API Calls</span>
+  <span class="c1">#</span>
+  <span class="k">def</span> <span class="nf">update_issue_preferences</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="vi">@options</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="ss">query: </span><span class="p">{</span> <span class="ss">issue: </span><span class="n">params</span> <span class="p">})</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">put</span><span class="p">(</span><span class="s2">"/issues/</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">/update_preferences"</span><span class="p">,</span> <span class="nb">hash</span><span class="p">)</span>
+
+    <span class="no">Rails</span><span class="p">.</span><span class="nf">logger</span><span class="p">.</span><span class="nf">info</span> <span class="n">response</span>
+
+    <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="o">==</span> <span class="mi">200</span>
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+      <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s1">'issue'</span><span class="p">])</span>
+    <span class="k">end</span>
+
+    <span class="n">os</span>
+  <span class="k">end</span>
+
+  <span class="c1">#</span>
+  <span class="c1"># Utility functions</span>
+  <span class="c1">#</span>
+  <span class="k">def</span> <span class="nf">attributes_to_os</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">os</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="s1">'attributes'</span><span class="p">])</span>
+    <span class="n">os</span><span class="p">.</span><span class="nf">id</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="s1">'id'</span><span class="p">].</span><span class="nf">to_i</span>
+    <span class="n">os</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
 </code></pre><h1 id='errors'>Errors</h1>
 <p>The Smartsettle API uses the following error codes:</p>
 
