@@ -16,9 +16,11 @@ search: true
 
 # Introduction
 
-Welcome to the Smartsettle API v1! You can use our API to access your negotiations, parties, and more! In the future we will support the negotiation intake and creation process.
+Welcome to the Smartsettle API v1! You can use our API to access your negotiations, parties, and more!
 
 Some of our API follows the <a href='http://jsonapi.org/format/' target='_blank'>JSON API v1 Format</a>.
+
+If you need help with anything contained in the documentation, please reach out to [developer.support@smartsettle.com](mailto:developer.support@smartsettle.com).
 
 > API responses will look like this:
 
@@ -36,6 +38,144 @@ Some of our API follows the <a href='http://jsonapi.org/format/' target='_blank'
   }
 }
 ```
+
+# General Usage Strategies
+
+## Whitelabel
+
+Quickly get started using Smartsettle ONE to handle negotiations. Adjust our existing web application branding and case intake process to fit your needs. We deploy your app instance to its own hardware stack at any of the major cloud providers to suite your specifc requirements. There are various Single Sign On (SSO) solutions we can impletment for your users in order to provide a seamless transition to and from your existing web application. This solution may not require any software development on your end.
+
+## Standalone Slider Widget (slider.js) + API + Whitelabel (configuration/tools/insights)
+
+Drop our negotiation javascript solution into your existing intake and case management process. Use our API to initalize and retreive existing data. Use whitelabel account management interface to build your own negotiation scenarios. This strategy provides the most seamless integration of our negotiation solution into your own application.
+
+<%= image_tag "images/slider2.png" %>
+
+### General Configuration
+
+Some configuration within the whitelabel application is required before the slider can be rendered:
+
+#### 1. Create at least one Negotiation Template
+
+A negotiation template defines a specific scenario: default party names, default issues, party intake steps, and an associated Agreement Framework. The party intake steps are only relevant to the whitelabel use case. In the 
+
+#### 2. Use one of our default Agreement Frameworks or create your own
+
+All Negotiation Templates need an associated Agreement Framework. The agreement framework step is optional but recommended. All parties need to agree to the Framework before a Negotiation can be carried out. If you wish to skip this requirement, it is possible to automate this for both parties. 
+
+#### 3. Configure your Expert Neutral Deal-closer (END) preferences in the account settings area. It is possible to disable this feature if desired.
+
+#### 4. Create/Sync Users with the Smartsettle ONE whitelabel instance.
+
+### Slider integration steps
+
+> Sample Ruby Implementation
+
+```ruby
+# Step 1
+@negotiation = SmartsettleApi.user(current_user).create_negotiation("mode": "normal",
+                                                                    "negotiation_template_id": 123,
+                                                                    "name": 'Case 123: Party A v Party B'
+                                                                    "invitee_party_email": 'party_a@example.com',
+                                                                    "creator_short_name": 'Party B',
+                                                                    "invitee_party_short_name": "Party A")
+
+# Step 2
+@negotiation.issue_ids.each do |issue_id|
+  SmartsettleApi.user(current_user).update_issue_preferences(issue_id, user: 1000, opponent: 0)
+end
+
+# Step 3
+SmartsettleApi.user(current_user).update_framework_acceptance(@negotiation.id, status: 'accept')
+SmartsettleApi.user(opponent).update_framework_acceptance(@negotiation.id, status: 'accept')
+
+# Step 4
+redirect_to "/dashboard/negotiations/#{@negotiation.id}"
+```
+
+Before the slider can be rendered, you need a Negotiation with all the details required for a negotiation completed.
+
+The steps required to integrate the slider.js into your own app might look like this:
+
+1. Create the negotiation using the API **Negotiation -> Create** endpoint.
+1. Set the issues preferences for each of the parties and issues using the API **Negotiation -> Update Issue Preference** endpoint.
+1. Update the Framework acceptance for each of the parties using the API **Negotiation -> Update Framework Acceptance** endpoint. This is generally hooked up the action were parties both agree to the draft Framework. (Optional, you can do this behind the scenes in order to skip this step. In ONE, both parties must agree to the issues and inital negotiating ranges before the negotiation can begin.)
+1. Render the slider.js (see [Standalone Slider Widget](#standalone-slider-widget-slider-js-api-whitelabel-configuration-tools-insights))
+
+# Javascript Widgets
+
+## Negotiations Slider
+
+### Integrate the Smartsettle ONE Slider into your own site
+
+### Overview
+
+You can allow users to realize Smartsettle ONE negotiations directly on your own site. By adding a few lines of HTML and Javascript you can include the slider on a page so your users can negotiate on a specific case using the slider.
+
+### Including the slider
+
+Include the necessary slider JS and CSS files on the page you want to show the slider as shown in the following HTML snippet.
+
+> Include the necessary slider JS and CSS
+
+```html
+<!-- Include this line in the head -->
+<link rel="stylesheet" href="https://smartsettle-public.s3.ca-central-1.amazonaws.com/slider/2/slider.css" />
+
+<!-- Include this line at the end of the body -->
+<script src="https://smartsettle-public.s3.ca-central-1.amazonaws.com/slider/2/slider.slim.js"></script>
+```
+
+Now we just need to create an instance of the slider. In order to do that we need to know: 
+ 
+  - The URL pointing to the API it should get it's data from
+  - The ID of the negotiation case it should display
+  - The credentials for the user interacting with the slider
+
+> Create an instance of the slider
+
+```javascript
+ var apiEndpoint = 'https://go.smartsettle.com/api/v1';
+ 
+ new SmartsettlePanel(
+   '#element-id',      // HTML node id. Slider will be placed here.
+   apiEndpoint,        // API for the data
+   2470,               // Id of the negotiation
+   'user@example.com', // User identifier
+   'users-api-key'     // ONE API key for user
+ );
+```
+
+Replace all the parameters for SmartsettlePanel with values that would make sense in your context. Now you should be able to see the slider on your page. Enjoy! 
+
+
+> You might also need to include the following JS and CSS
+
+```html
+<!-- 
+NOTE:
+The above HTML assumes you're already using and including Bootstrap 3 and JQuery. 
+The slider has several modal dialogs which currently depend on these two. 
+If you're not using Bootstrap 3 and JQuery you should add them at least on 
+the page you want to show the slider. The following lines include the necessary 
+slider JS and CSS files for Bootstrap 3, JQuery and the Slider itself.
+-->
+
+<!-- In header -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.css" />
+<link rel="stylesheet" href="https://smartsettle-public.s3.ca-central-1.amazonaws.com/slider/2/slider.css" />
+
+<!-- At end of body -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+<script src="https://smartsettle-public.s3.ca-central-1.amazonaws.com/slider/2/slider.slim.js"></script>
+```
+
+## Agreement Framework Viewer
+
+### Coming Soon!
+
+This widget will allow parties to view and accept the agreement framework for a specific negotiation.
 
 # Authentication
 
@@ -1372,6 +1512,59 @@ curl --get "https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/negot
 
 Retrieve general information about specific negotiation. All you need to know is the negotiation id. This endpoint is intended to provide support for all the data required to render the negotiaion panel.
 
+## Update Framework Acceptance
+
+
+
+## Create Negotiation
+
+A administrator
+
+> Sample Call
+
+```shell
+curl --post "https://go.smartsettle.com/api/v1/negotiations"
+```
+
+> Sample Payload
+
+```json
+{
+  "negotiation": {
+    "mode": "normal",
+    "name": "Party123 vs. BigCorp777",
+    "negotiation_template_id": 12,
+    "invitee_party_email": "party123@example.com",
+    "creator_short_name": "Big Corp",
+    "invitee_party_short_name": "Party 123"
+  }
+}
+```
+
+The response from the creation endpoint will be the new negotiation as a json object.
+
+# Issue
+
+## Update Preference
+
+This endpoint is called using a specifc users API creds. That user would be one party of the negotiation.
+
+> Sample Payload
+
+```json
+{
+  id: issue_id,
+  user: 1000,
+  opponent: 0
+}
+```
+
+> Sample Call
+
+```shell
+curl --put "https://go.smartsettle.com/api/v1/issues/#{id}/update_preferences"
+```
+
 # Party
 
 ## Get Party
@@ -1382,9 +1575,54 @@ Retrieve general information about specific negotiation. All you need to know is
 
 ## Get User
 
+> Sample Call
+
+```shell
+curl --get "https://go.smartsettle.com/api/v1/users/:id"
+```
+
 ## Update User
 
+> Sample Call
+
+```shell
+curl --put "https://go.smartsettle.com/api/v1/users/:id"
+```
+
 ## Create User
+
+Creating a User only requries an email address.
+
+> Sample Call
+
+```shell
+curl --post "https://go.smartsettle.com/api/v1/users"
+```
+
+### Important
+After creating a User via the API, be sure to store the email and authentication_token (API token). The email + token will allow you to perform API calls on behalf of the User and render widgets using this Users context.
+
+> Sample Response
+
+```json
+{
+   "user":{
+      "id":92,
+      "email":"tony@example.com",
+      "name":"",
+      "mobile_number":"",
+      "completed_setup":true,
+      "admin":false,
+      "facilitator":false,
+      "expert_neutral":false,
+      "locale":"en",
+      "user_type":"normal",
+      "times_invited":0,
+      "prompt_stripe_config":false,
+      "authentication_token":"K_cHF1ZqW_jsvzgwyRdv"
+   }
+}
+```
 
 # History
 
@@ -1505,16 +1743,231 @@ curl --get "https://go.smartsettle.com/api/v1/history/:negotiation_id"
 Retrieve the history logs for a given negotiation and context of the currently authenticated party. All you need to know is the negotiation id.
 
 # Automated Negotiation Actions
-
 You can pre schedule moves for each session and issue.
 
-Requires documentation.
+## List Automated Negotiation Actions
+> Sample Call
 
-# Private Reference Packages
+```shell
+curl --get "https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/automated_negotiation_actions"
+```
 
-Lets you create a series of packages based on multiple issues. Currently it is used to create acceptable payment plans and used to derive an acceptable present value.
+> Sample Response
 
-Requires documentation.
+```json
+{ 
+   "automated_negotiation_actions":[ 
+      { 
+         "id":680,
+         "session":1,
+         "comment":"This is my best offer",
+         "final":null,
+         "negotiation_id":337,
+         "party_id":571,
+         "completed":false,
+         "errors":null,
+         "not_played":false,
+         "automated_issue_actions":[ 
+            { 
+               "id":680,
+               "issue_id":282,
+               "visible":"12000",
+               "secret":"11000",
+               "private_reference_package_id":null,
+               "automatic_deal_closer":"500"
+            }
+         ]
+      },
+      { 
+         "id":681,
+         "session":2,
+         "comment":null,
+         "final":null,
+         "negotiation_id":337,
+         "party_id":571,
+         "completed":false,
+         "errors":null,
+         "not_played":false,
+         "automated_issue_actions":[ 
+            { 
+               "id":681,
+               "issue_id":282,
+               "visible":"11000",
+               "secret":"10000",
+               "private_reference_package_id":null,
+               "automatic_deal_closer":"500"
+            }
+         ]
+      },
+      { 
+         "id":679,
+         "session":99,
+         "comment":"",
+         "final":true,
+         "negotiation_id":337,
+         "party_id":571,
+         "completed":false,
+         "errors":null,
+         "not_played":false,
+         "automated_issue_actions":[ 
+            { 
+               "id":679,
+               "issue_id":282,
+               "visible":"10000",
+               "secret":"9500",
+               "private_reference_package_id":null,
+               "automatic_deal_closer":"500"
+            }
+         ]
+      }
+   ]
+}
+```
+
+## Bulk Update/Create Automated Negotiation Actions
+> Sample Call
+
+```shell
+curl --put "https://go.smartsettle.com/api/v1/negotiations/:negotiation_id/automated_negotiation_actions/bulk_update"
+```
+
+> Sample Request Payload
+
+```json
+{ 
+   "negotiation":{ 
+      "id":"337",
+      "automated_negotiation_actions_attributes":[ 
+         { 
+            "id":"680",
+            "session":"1",
+            "comment":"This is my best offer",
+            "final":"",
+            "negotiation_id":"337",
+            "party_id":"571",
+            "completed":"false",
+            "errors":"",
+            "not_played":"false",
+            "automated_issue_actions":[ 
+               { 
+                  "id":"680",
+                  "issue_id":"282",
+                  "visible":"12000",
+                  "secret":"11000",
+                  "private_reference_package_id":"",
+                  "automatic_deal_closer":"500"
+               }
+            ],
+            "automated_issue_actions_attributes":[ 
+               { 
+                  "id":"680",
+                  "issue_id":"282",
+                  "visible":"12000",
+                  "secret":"11000",
+                  "private_reference_package_id":"",
+                  "automatic_deal_closer":"500"
+               }
+            ]
+         },
+         { 
+            "id":"681",
+            "session":"2",
+            "comment":"",
+            "final":"",
+            "negotiation_id":"337",
+            "party_id":"571",
+            "completed":"false",
+            "errors":"",
+            "not_played":"false",
+            "automated_issue_actions":[ 
+               { 
+                  "id":"681",
+                  "issue_id":"282",
+                  "visible":"11000",
+                  "secret":"10000",
+                  "private_reference_package_id":"",
+                  "automatic_deal_closer":"500"
+               }
+            ],
+            "automated_issue_actions_attributes":[ 
+               { 
+                  "id":"681",
+                  "issue_id":"282",
+                  "visible":"11000",
+                  "secret":"10000",
+                  "private_reference_package_id":"",
+                  "automatic_deal_closer":"500"
+               }
+            ]
+         },
+         { 
+            "id":"683",
+            "session":"3",
+            "comment":"",
+            "final":"",
+            "negotiation_id":"337",
+            "party_id":"571",
+            "completed":"false",
+            "errors":"",
+            "not_played":"false",
+            "automated_issue_actions":[ 
+               { 
+                  "id":"683",
+                  "issue_id":"282",
+                  "visible":"9000",
+                  "secret":"8000",
+                  "private_reference_package_id":"",
+                  "automatic_deal_closer":""
+               }
+            ],
+            "_destroy":"true",
+            "automated_issue_actions_attributes":[ 
+               { 
+                  "id":"683",
+                  "issue_id":"282",
+                  "visible":"9000",
+                  "secret":"8000",
+                  "private_reference_package_id":"",
+                  "automatic_deal_closer":""
+               }
+            ]
+         },
+         { 
+            "id":"679",
+            "session":"99",
+            "comment":"",
+            "final":"true",
+            "negotiation_id":"337",
+            "party_id":"571",
+            "completed":"false",
+            "errors":"",
+            "not_played":"false",
+            "automated_issue_actions":[ 
+               { 
+                  "id":"679",
+                  "issue_id":"282",
+                  "visible":"10000",
+                  "secret":"9500",
+                  "private_reference_package_id":"",
+                  "automatic_deal_closer":"500"
+               }
+            ],
+            "automated_issue_actions_attributes":[ 
+               { 
+                  "id":"679",
+                  "issue_id":"282",
+                  "visible":"10000",
+                  "secret":"9500",
+                  "private_reference_package_id":"",
+                  "automatic_deal_closer":"500"
+               }
+            ]
+         ]
+      }
+   }
+}
+```
+
 
 # Expert Neutral Negotiation
 
@@ -1583,4 +2036,253 @@ curl --put "https://go.smartsettle.com/api/v1/expert_neutral_profiles/:id"
 
 ```shell
 curl --delete "https://go.smartsettle.com/api/v1/expert_neutral_profiles/:id"
+```
+
+# Additional Resources
+
+## Ruby API Wrapper Example
+
+```ruby
+class SmartsettleApi
+
+  class SignUpError < StandardError; end
+  class UserValidationError < StandardError; end
+  class GeneralError < StandardError; end
+
+  include HTTParty
+
+  default_timeout 30
+  open_timeout 30
+  read_timeout 30
+
+  base_uri((Rails.env.development? ? 'http://' : 'https://') + Rails.application.secrets.smartsettle_api_domain)
+
+  def initialize(user, key)
+    # NOTE: Need to merge these options in all API call functions ;)
+    @options = { headers: { 'X-User-Email': user, 'X-User-Token': key } }
+  end
+
+  def self.admin_api
+    # NOTE: Uses any Whitelabel admins API key
+    @admin_api ||= new(Rails.application.secrets.smartsettle_username,
+                       Rails.application.secrets.smartsettle_api_key)
+  end
+
+  def self.user(user)
+    @user_api = new(user.smartsettle_email, user.smartsettle_key)
+  end
+
+  #
+  # Admin API Calls
+  #
+  # NOTE: An admin API key will be required to use and admin API endpoints
+  #
+
+  def create_user(params)
+    hash = @options.merge(query: { user: params })
+    self.class.post("/users", hash)
+  end
+
+  def list_negotiation_templates(params)
+    hash = @options.merge(query: params)
+    response = self.class.get("/negotiation_templates", hash)
+    results = []
+    
+    Rails.logger.info response
+
+    if response.code == 200
+      json = JSON.parse(response.body)
+      if json.present?
+        json.each do |n|
+          os = OpenStruct.new(n)
+          os.id = n['id'].to_i
+          results << os
+        end
+      end
+    else
+      results
+    end
+
+    results
+  end
+
+  def get_negotiation_template(id, params = {})
+    hash = @options.merge(query: { negotiation: params })
+    response = self.class.get("/negotiation_templates/#{id}", hash)
+    os = OpenStruct.new
+    
+    Rails.logger.info response
+
+    if response.code == 200
+      json = JSON.parse(response.body)
+      os = OpenStruct.new(json)
+    end
+
+    os
+  end
+
+  #
+  # Admin Expert Neutral API Calls
+  #
+  def create_expert_neutral_profile(user_id, params = {})
+    params[:user_id] = user_id
+    hash = @options.merge(query: { expert_neutral_profile: params }, follow_redirects: false)
+    response = self.class.post("/expert_neutral_profiles", hash)
+    os = OpenStruct.new
+    
+    Rails.logger.info response
+
+    if response.code == 200
+      json = JSON.parse(response.body)
+      os = OpenStruct.new(json)
+    end
+
+    os
+  end
+
+  #
+  # User Expert Neutral API Calls
+  #
+  def get_end_details(id, params = {})
+    hash = @options.merge(query: { negotiation: params })
+    response = self.class.get("/negotiations/#{id}/end_details", hash)
+    os = OpenStruct.new
+
+    Rails.logger.info response
+
+    if response.code == 200
+      json = JSON.parse(response.body)
+      os = OpenStruct.new(json['negotiation'])
+    end
+
+    os
+  end
+
+  def update_expert_neural_value(issue_id, negotiation_id, params)
+    hash = @options.merge(query: params)
+    response = self.class.put("/negotiations/#{negotiation_id}/expert_neutral_values/#{issue_id}", hash)
+    
+    Rails.logger.info response
+    
+    json = {}
+    json = JSON.parse(response.body) if response.code == 200
+
+    json
+  end
+
+  #
+  # User Negotiation API Calls
+  #
+  def list_negotiations(params)
+    hash = @options.merge(query: params)
+    response = self.class.get("/negotiations", hash)
+    results = []
+
+    Rails.logger.info response
+
+    if response.code == 200
+      json = JSON.parse(response.body)
+      if json['data'].present?
+        json['data'].each do |n|
+          results << attributes_to_os(n)
+        end
+      end
+    else
+      results
+    end
+
+    results
+  end
+
+  def create_negotiation(params)
+    hash = @options.merge(query: { negotiation: params })
+    response = self.class.post("/negotiations", hash)
+    os = OpenStruct.new
+    json = JSON.parse(response.body)
+
+    Rails.logger.info response
+
+    if response.code == 200
+      unless json['errors'].present?
+        os = OpenStruct.new(json['negotiation'])
+      else
+        return json
+      end
+    end
+
+    os
+  end
+
+  def get_negotiation(id, params = {})
+    hash = @options.merge(query: { negotiation: params })
+    response = self.class.get("/negotiations/#{id}", hash)
+    os = OpenStruct.new
+
+    Rails.logger.info response
+
+    if response.code == 200
+      json = JSON.parse(response.body)
+      os = OpenStruct.new(json['negotiation'])
+    end
+
+    os
+  end
+
+  def get_negotiation_status(id, params = {})
+    hash = @options.merge(query: { negotiation: params })
+    response = self.class.get("/negotiations/#{id}/negotiation_status", hash)
+    os = OpenStruct.new
+    
+    Rails.logger.info response
+
+    if response.code == 200
+      json = JSON.parse(response.body)
+      os = OpenStruct.new(json['negotiation'])
+    end
+
+    os
+  end
+
+  def update_framework_acceptance(id, params)
+    hash = @options.merge(query: params)
+    response = self.class.put("/negotiations/#{id}/framework_acceptance", hash)
+    
+    Rails.logger.info response
+
+    json = {}
+
+    json = JSON.parse(response.body) if response.code == 200
+
+    json
+  end
+
+  #
+  # User Issue API Calls
+  #
+  def update_issue_preferences(id, params)
+    hash = @options.merge(query: { issue: params })
+    response = self.class.put("/issues/#{id}/update_preferences", hash)
+    
+    Rails.logger.info response
+
+    os = OpenStruct.new
+
+    if response.code == 200
+      json = JSON.parse(response.body)
+      os = OpenStruct.new(json['issue'])
+    end
+
+    os
+  end
+
+  #
+  # Utility functions
+  #
+  def attributes_to_os(n)
+    os = OpenStruct.new(n['attributes'])
+    os.id = n['id'].to_i
+    os
+  end
+end
+
 ```
